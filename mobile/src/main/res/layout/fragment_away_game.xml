@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/away_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/awayPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingRight="@dimen/player_name_label_padding"
+            android:text="@string/player_two_label"
+            android:textColor="@color/away_game_score_label_color"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/player_name_label_size"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/awayPlayerEditText"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/player_name_hint"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textSize="@dimen/player_name_edit_text_size"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/away_score"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:shadowColor="@color/tennis_ball_green_shadow"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="2"
+            android:text="15"
+            android:textColor="@color/away_game_score_label_color"
+            android:textSize="@dimen/game_score_label_normal_size" />
+
+        <ImageView
+            android:id="@+id/server_icon"
+            android:layout_width="@dimen/server_icon_width"
+            android:layout_height="@dimen/server_icon_width"
+            android:src="@drawable/racket72"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/away_server_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/receiver_label"
+            android:textColor="@color/server_receiver_label_color"
+            android:textStyle="bold"
+            android:textSize="@dimen/server_receiver_label_size" />
+    </LinearLayout>
+</LinearLayout>
+
