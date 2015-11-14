@@ -5,7 +5,11 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +20,14 @@ import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
+import com.keeper.score.common.IScore;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.utils.FragmentUtils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
 
 public class MainActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, DialogInterface.OnDismissListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -126,7 +135,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
         mSetScoreCallback.resetSetScores();
         updateAlertId(R.drawable.alerticon);
-        setAnnouncements(getString(R.string.announcement_set_one));
+        setAnnouncements(getString(R.string.announcement_set_one), "", false);
     }
 
     @Override
@@ -250,21 +259,19 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
                 getString(R.string.game_set_match_title),
                 winner + getString(R.string.game_set_match_msg),
                 getString(R.string.game_set_match_pos_btn),
-                getString(R.string.confirm_win_neg_btn),
+                getString(R.string.game_set_match_snapshot_btn),
                 getString(R.string.quit_btn),
                 Enum.ALERT_TYPE.GAME_SET_MATCH);
     }
 
     @Override
     public void firstSetActive() {
-        showToast(getString(R.string.toast_starting_1st_set));
-        mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one));
+        mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
     }
 
     @Override
     public void secondSetActive() {
-        showToast(getString(R.string.toast_starting_2nd_set));
-        mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_two));
+        mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_two), "", false);
     }
 
     @Override
@@ -293,10 +300,10 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
      * Toast Helper
      */
 
-    private void showToast(String toast) {
-        Toast.makeText(this, toast,
-                Toast.LENGTH_LONG).show();
-    }
+//    private void showToast(String toast) {
+//        Toast.makeText(this, toast,
+//                Toast.LENGTH_LONG).show();
+//    }
 
     /*********
      * IAlertDialog
@@ -325,16 +332,14 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
                                 break;
                             case SCORING_SYSTEM:
                                 setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
-                                showToast(getString(R.string.toast_starting_3rd_set));
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three));
+                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "Full Set", true);
                                 break;
                             case GAME_SET_MATCH:
                                 resetGameScores();
                                 resetSetScores();
                                 updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
                                 firstSetActive();
-                                showToast(getString(R.string.toast_starting_1st_set));
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one));
+                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
                                 break;
                         }
                     }
@@ -354,10 +359,14 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
                             case SCORING_SYSTEM:
                                 Log.d(TAG, "SCORING_SYSTEM");
                                 setScoringSystem(Enum.SCORING_SYSTEM.TEN_POINT_SCORING);
-                                showToast(getString(R.string.toast_starting_3rd_set));
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three));
+                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "10-Point TB", true);
                                 break;
                             case GAME_SET_MATCH:
+                                takeScreenshot();
+                                resetGameScores();
+                                resetSetScores();
+                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
+                                firstSetActive();
                                 break;
 
                         }
@@ -405,11 +414,48 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     }
 
     @Override
-    public void setAnnouncements(String text) {
-        mAnnouncementCallback.setAnnouncements(text);
+    public void setAnnouncements(String label, String subLabel, boolean showSubLabel) {
+        mAnnouncementCallback.setAnnouncements(label, subLabel, showSubLabel);
     }
 
     public static void updateAlertId(int alertId) {
         alertIconId = alertId;
     }
+
+    private void takeScreenshot() {
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        try {
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+
+            // create bitmap screen capture
+            View v1 = getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+            v1.setDrawingCacheEnabled(false);
+
+            File imageFile = new File(mPath);
+
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
+
+            openScreenshot(imageFile);
+        } catch (Throwable e) {
+            // Several error may come out with file handling or OOM
+            e.printStackTrace();
+        }
+    }
+    private void openScreenshot(File imageFile) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        Uri uri = Uri.fromFile(imageFile);
+        intent.setDataAndType(uri, "image/*");
+        startActivity(intent);
+    }
+
 }

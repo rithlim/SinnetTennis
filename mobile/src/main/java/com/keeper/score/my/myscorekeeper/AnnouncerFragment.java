@@ -22,6 +22,7 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
     private static final String ARG_PARAM2 = "param2";
 
     private TextView tvAnnouncementLabel;
+    private TextView tvAnnouncementSubLabel;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,6 +65,7 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_announcer, container, false);
         tvAnnouncementLabel = (TextView) view.findViewById(R.id.announcement_label);
+        tvAnnouncementSubLabel = (TextView) view.findViewById(R.id.announcement_sub_label);
         setListeners();
         return view;
     }
@@ -77,6 +79,7 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
             }
         });
     }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -89,9 +92,11 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
     }
 
     @Override
-    public void setAnnouncements(String text) {
-        if (tvAnnouncementLabel != null) {
-            tvAnnouncementLabel.setText(text);
+    public void setAnnouncements(String label, String subLabel, boolean showSubLabel) {
+        if (tvAnnouncementLabel != null && subLabel != null) {
+            tvAnnouncementLabel.setText(label);
+            tvAnnouncementSubLabel.setText(subLabel);
+            tvAnnouncementSubLabel.setVisibility((showSubLabel) ? View.VISIBLE : View.INVISIBLE);
             bounceAnimation();
         }
     }
@@ -112,5 +117,6 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
         translation.setFillAfter(true);
         translation.setInterpolator(new BounceInterpolator());
         tvAnnouncementLabel.startAnimation(translation);
+        tvAnnouncementSubLabel.startAnimation(translation);
     }
 }

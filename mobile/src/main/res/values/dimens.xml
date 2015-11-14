@@ -14,4 +14,5 @@
     <dimen name="player_name_set_label_size">22dp</dimen>
 
     <dimen name="announcement_label_size">35dp</dimen>
+    <dimen name="announcement_sub_label_size">20dp</dimen>
 </resources>

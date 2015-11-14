@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IGameListener;
+import com.keeper.score.common.IScore;
 import com.keeper.score.common.IScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
@@ -230,7 +231,7 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
             return "The Man!";
         }
         else if (playerName.equalsIgnoreCase(getString(R.string.player_kim_name))) {
-            return "Loser Kim!";
+            return "Lovely Kim!";
         }
         else if(playerName.equalsIgnoreCase(getString(R.string.player_jason_name))) {
             return "Fuck Face!";
@@ -244,7 +245,7 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
             int oldTBScore = mTieBreakerScore;
             mTieBreakerScore += 1;
             updateTextView(String.valueOf(mTieBreakerScore));
-            mTBScoreLimit = (mSetScoreListener.getCurrentSet().equals(Enum.CURRENT_SET.THIRD_SET))
+            mTBScoreLimit = ((IScore)getActivity()).getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)
                     ? m10PointTieBreakerLimit
                     : m7PointTieBreakerLimit;
             boolean isMyLimit = mTieBreakerScore >= mTBScoreLimit;

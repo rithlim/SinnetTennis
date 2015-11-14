@@ -29,14 +29,15 @@
     <string name="confirm_win_neg_btn">Cancel</string>
     <string name="confirm_win_neutral_btn">Reset Game</string>
 
-    <string name="third_set_scoring_title">Wow! Split Sets!</string>
+    <string name="third_set_scoring_title">Split Sets!</string>
     <string name="third_set_scoring_msg">Select Set Scoring.</string>
     <string name="third_set_scoring_game_pos">Full Set</string>
     <string name="third_set_scoring_10_point_neg">10pt TB</string>
 
     <string name="game_set_match_title">Game Set Match</string>
     <string name="game_set_match_msg">&#160;wins!</string>
-    <string name="game_set_match_pos_btn">New Game</string>
+    <string name="game_set_match_pos_btn">New Match</string>
+    <string name="game_set_match_snapshot_btn">Snapshot</string>
     <string name="quit_btn">Quit App</string>
 
     <string name="positive_btn_text">Confirm</string>
@@ -53,5 +54,6 @@
     <string name="announcement_set_one">Set 1</string>
     <string name="announcement_set_two">Set 2</string>
     <string name="announcement_set_three">Set 3</string>
+    <string name="annoucement_sub_label">sub label</string>
 
 </resources>
