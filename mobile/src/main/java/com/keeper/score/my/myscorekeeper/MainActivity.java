@@ -62,7 +62,8 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         setContentView(view);
         addFragment();
         resetSetScores();
-        alertIconId = R.drawable.alerticon;
+//        alertIconId = R.drawable.alerticon;
+        alertIconId = android.R.drawable.ic_dialog_alert;
     }
 
     @Override
