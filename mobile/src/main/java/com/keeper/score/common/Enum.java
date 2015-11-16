@@ -27,7 +27,13 @@ public class Enum {
         FORTY,
         DEUCE,
         ADD_IN,
-        ADD_OUT,
+        ADD_OUT;
+
+        private static GAME_SCORE[] vals = values();
+        public GAME_SCORE next()
+        {
+            return vals[(this.ordinal()+1) % vals.length];
+        }
     }
 
     public enum ALERT_TYPE {
@@ -35,7 +41,8 @@ public class Enum {
         RESET_SET,
         CONFIRM_GAME_SCORE,
         SCORING_SYSTEM,
-        GAME_SET_MATCH
+        GAME_SET_MATCH,
+        QUIT_APP
     }
 
     public enum CURRENT_SET {

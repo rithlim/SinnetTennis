@@ -6,6 +6,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,22 +15,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
-import com.keeper.score.common.IScore;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
+import com.keeper.score.common.ITutorial;
+import com.keeper.score.common.SinnetPreferences;
 import com.keeper.score.utils.FragmentUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 
-public class MainActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, DialogInterface.OnDismissListener {
+public class MainActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, DialogInterface.OnDismissListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static String mCurrentGameWinner;
 
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     AwayGameFragment awayGameFragment;
     SetScoreFragment setScoreFragment;
     AnnouncerFragment announcerFragment;
+    TutorialFragment tutorialFragment;
 
     IGameListener mHomeGameCallback;
     IGameListener mAwayGameCallback;
@@ -91,9 +93,26 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     }
 
     @Override
+    public void onBackPressed() {
+        showAlert("Quit App",
+                "Are you sure you want to quit?",
+                "Yes",
+                "No",
+                null,
+                Enum.ALERT_TYPE.QUIT_APP);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         Log.d(TAG, "onPause()");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        homeGameFragment.loadPreferences();
+        awayGameFragment.loadPreferences();
     }
 
     /***********
@@ -115,6 +134,10 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         FragmentUtils.launchFragment(fm, setScoreFragment, R.id.set_container, false, SetScoreFragment.class.getSimpleName());
         FragmentUtils.launchFragment(fm, announcerFragment, R.id.main_layout, false, AnnouncerFragment.class.getSimpleName());
 
+        if (!SinnetPreferences.getBooleanPreferences(this, TutorialFragment.class.getSimpleName())) {
+            tutorialFragment = TutorialFragment.newInstance("", "");
+            FragmentUtils.launchFragment(fm, tutorialFragment, R.id.main_layout, true, TutorialFragment.class.getSimpleName());
+        }
 
         mHomeGameCallback = homeGameFragment;
         mAwayGameCallback = awayGameFragment;
@@ -341,6 +364,9 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
                                 firstSetActive();
                                 mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
                                 break;
+                            case QUIT_APP:
+                                finish();
+                                break;
                         }
                     }
                 })
@@ -450,12 +476,24 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
             e.printStackTrace();
         }
     }
+
     private void openScreenshot(File imageFile) {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
         Uri uri = Uri.fromFile(imageFile);
         intent.setDataAndType(uri, "image/*");
-        startActivity(intent);
+        ActivityInfo activityInfo = intent.resolveActivityInfo(getPackageManager(), intent.getFlags());
+        if (activityInfo.exported) {
+            startActivity(intent);
+        } else {
+
+        }
     }
 
+    @Override
+    public void endTutorial() {
+        FragmentManager fm = getFragmentManager();
+        fm.popBackStack();
+        SinnetPreferences.putPreferences(this, TutorialFragment.class.getSimpleName(), true);
+    }
 }

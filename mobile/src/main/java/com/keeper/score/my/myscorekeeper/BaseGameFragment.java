@@ -22,6 +22,7 @@ import com.keeper.score.common.IScore;
 import com.keeper.score.common.IScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
+import com.keeper.score.common.SinnetPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -227,16 +228,13 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
     }
 
     private String specialTransform(String playerName) {
-        if(playerName.equalsIgnoreCase(getString(R.string.player_rith_name))) {
+        if (playerName.equalsIgnoreCase(getString(R.string.player_rith_name))) {
             return "The Man!";
-        }
-        else if (playerName.equalsIgnoreCase(getString(R.string.player_kim_name))) {
+        } else if (playerName.equalsIgnoreCase(getString(R.string.player_kim_name))) {
             return "Lovely Kim!";
-        }
-        else if(playerName.equalsIgnoreCase(getString(R.string.player_jason_name))) {
+        } else if (playerName.equalsIgnoreCase(getString(R.string.player_jason_name))) {
             return "Fuck Face!";
-        }
-        else return playerName;
+        } else return playerName;
     }
 
     @Override
@@ -245,14 +243,14 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
             int oldTBScore = mTieBreakerScore;
             mTieBreakerScore += 1;
             updateTextView(String.valueOf(mTieBreakerScore));
-            mTBScoreLimit = ((IScore)getActivity()).getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)
+            mTBScoreLimit = ((IScore) getActivity()).getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)
                     ? m10PointTieBreakerLimit
                     : m7PointTieBreakerLimit;
             boolean isMyLimit = mTieBreakerScore >= mTBScoreLimit;
             boolean isOpponentLimit = mGameListener.getOpponentTBScore(TAG) >= mTBScoreLimit;
             boolean isMoreThan2 = moreThan2PointsDifferent();
             if ((isMyLimit || isOpponentLimit) && isMoreThan2) {
-                if(mTieBreakerScore > mGameListener.getOpponentTBScore(TAG))
+                if (mTieBreakerScore > mGameListener.getOpponentTBScore(TAG))
                     submitGameResults(TAG, mGameScore);
                 else
                     opponentWins();
@@ -482,6 +480,8 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
     public void setPlayersName(String tag, String name) {
         if (tag.equalsIgnoreCase(TAG)) {
             mTvPlayerName.setText(name);
+
+            SinnetPreferences.putPreferences(this.getActivity(), tag, name);
         }
     }
 
@@ -517,5 +517,13 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
     private void resetCoordinates() {
         yEnd = 0;
         yStart = 0;
+    }
+
+    public void loadPreferences() {
+        String cachedPlayersName = SinnetPreferences.getPreferences(getActivity(), TAG);
+        if (cachedPlayersName != null && !cachedPlayersName.isEmpty()) {
+            mTvPlayerName.setText(cachedPlayersName);
+            mSetScoreListener.setPlayersName(TAG, cachedPlayersName);
+        }
     }
 }

@@ -118,7 +118,8 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     @Override
     public void setPlayersName(String tag, String name) {
-        setScoreTableView.setPlayersName(tag, name);
+        if (setScoreTableView != null)
+            setScoreTableView.setPlayersName(tag, name);
     }
 
 
@@ -196,16 +197,16 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     @Override
     public void enableTieBreakerMode(boolean mode) {
         mTieBreakerMode = mode;
-        if(mode) {
-            String currentSet="";
-            if(getCurrentSet().equals(Enum.CURRENT_SET.FIRST_SET))
+        if (mode) {
+            String currentSet = "";
+            if (getCurrentSet().equals(Enum.CURRENT_SET.FIRST_SET))
                 currentSet = getString(R.string.announcement_set_one);
             else if (getCurrentSet().equals(Enum.CURRENT_SET.SECOND_SET))
                 currentSet = getString(R.string.announcement_set_two);
             else if (getCurrentSet().equals(Enum.CURRENT_SET.THIRD_SET))
                 currentSet = getString(R.string.announcement_set_three);
-            ((IAnnouncements)getActivity()).setAnnouncements(currentSet, "7-Point TB", true);
-            ((IScore)getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.SEVEN_POINT_SCORING);
+            ((IAnnouncements) getActivity()).setAnnouncements(currentSet, "7-Point TB", true);
+            ((IScore) getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.SEVEN_POINT_SCORING);
         }
     }
 
@@ -228,14 +229,14 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     @Override
     public void firstSetActive() {
         setScoreCallback.firstSetActive();
-        ((IScore)getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
+        ((IScore) getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
     }
 
     @Override
     public void secondSetActive() {
         recordFirstSetWinner();
         setScoreCallback.secondSetActive();
-        ((IScore)getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
+        ((IScore) getActivity()).setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
     }
 
     @Override
