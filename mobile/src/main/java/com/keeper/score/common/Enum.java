@@ -57,4 +57,9 @@ public class Enum {
         SEVEN_POINT_SCORING,
         TEN_POINT_SCORING
     }
+
+    public enum LAUNCH_BUTTON {
+        PLAY,
+        STATISTICS
+    }
 }

@@ -55,6 +55,12 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
 
     private static Enum.SCORING_SYSTEM mScoringSystem;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPreferences();
+    }
+
     protected void setView(View view, int tvID, int tvPlayer, int etPlayer, int tvServerReceiver, boolean isServer, int serverRId) {
         mView = view;
         mTvGameScore = (TextView) view.findViewById(tvID);
@@ -85,6 +91,7 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
 
         inputMethodManager = (InputMethodManager) getActivity().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         resetGameScores();
+        mScoringSystem = Enum.SCORING_SYSTEM.FULL_SET_SCORING;
     }
 
     @Override

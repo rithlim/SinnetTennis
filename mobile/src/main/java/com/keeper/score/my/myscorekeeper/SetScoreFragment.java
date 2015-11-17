@@ -29,15 +29,15 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     private String mParam1;
     private String mParam2;
 
-    private static TextView mHomePlayerName;
-    private static TextView mAwayPlayerName;
+    private static TextView tvHomePlayerName;
+    private static TextView tvAwayPlayerName;
 
-    private static TextView mHomePlayerFirstSetScore;
-    private static TextView mHomePlayerSecondSetScore;
-    private static TextView mHomePlayerThirdSetScore;
-    private static TextView mAwayPlayerFirstSetScore;
-    private static TextView mAwayPlayerSecondSetScore;
-    private static TextView mAwayPlayerThirdSetScore;
+    private static TextView tvHomePlayerFirstSetScore;
+    private static TextView tvHomePlayerSecondSetScore;
+    private static TextView tvHomePlayerThirdSetScore;
+    private static TextView tvAwayPlayerFirstSetScore;
+    private static TextView tvAwayPlayerSecondSetScore;
+    private static TextView tvAwayPlayerThirdSetScore;
 
 
     private static int mHomePlayerSetOneScore;
@@ -92,6 +92,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         injectViews(view);
         setupViewListener(view);
         mCurrentSet = Enum.CURRENT_SET.FIRST_SET;
+        resetSetScores();
         return view;
     }
 
@@ -123,9 +124,9 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     @Override
     public String getPlayersName(String tag) {
         if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
-            return mHomePlayerName.getText().toString();
+            return tvHomePlayerName.getText().toString();
         } else {
-            return mAwayPlayerName.getText().toString();
+            return tvAwayPlayerName.getText().toString();
         }
 
         //return setScoreTableView.getPlayersName(tag);
@@ -134,23 +135,23 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     @Override
     public void setPlayersName(String tag, String name) {
         if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
-            mHomePlayerName.setText(name);
+            tvHomePlayerName.setText(name);
         } else {
-            mAwayPlayerName.setText(name);
+            tvAwayPlayerName.setText(name);
         }
     }
 
     private void injectViews(View view) {
-        mHomePlayerName = (TextView) view.findViewById(R.id.set_frame_home_player_name);
-        mAwayPlayerName = (TextView) view.findViewById(R.id.set_frame_away_player_name);
+        tvHomePlayerName = (TextView) view.findViewById(R.id.set_frame_home_player_name);
+        tvAwayPlayerName = (TextView) view.findViewById(R.id.set_frame_away_player_name);
 
-        mHomePlayerFirstSetScore = (TextView) view.findViewById(R.id.set_frame_home_first_set_score);
-        mHomePlayerSecondSetScore = (TextView) view.findViewById(R.id.set_frame_home_second_set_score);
-        mHomePlayerThirdSetScore = (TextView) view.findViewById(R.id.set_frame_home_third_set_score);
+        tvHomePlayerFirstSetScore = (TextView) view.findViewById(R.id.set_frame_home_first_set_score);
+        tvHomePlayerSecondSetScore = (TextView) view.findViewById(R.id.set_frame_home_second_set_score);
+        tvHomePlayerThirdSetScore = (TextView) view.findViewById(R.id.set_frame_home_third_set_score);
 
-        mAwayPlayerFirstSetScore = (TextView) view.findViewById(R.id.set_frame_away_first_set_score);
-        mAwayPlayerSecondSetScore = (TextView) view.findViewById(R.id.set_frame_away_second_set_score);
-        mAwayPlayerThirdSetScore = (TextView) view.findViewById(R.id.set_frame_away_third_set_score);
+        tvAwayPlayerFirstSetScore = (TextView) view.findViewById(R.id.set_frame_away_first_set_score);
+        tvAwayPlayerSecondSetScore = (TextView) view.findViewById(R.id.set_frame_away_second_set_score);
+        tvAwayPlayerThirdSetScore = (TextView) view.findViewById(R.id.set_frame_away_third_set_score);
     }
 
     //Helper Methods
@@ -171,6 +172,14 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
                     return true;
                 }
             });
+
+            tvHomePlayerFirstSetScore.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    
+                }
+            });
         }
     }
 
@@ -189,14 +198,14 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         mSetWonByAwayPlayer = 0;
         mSetWonByHomePlayer = 0;
 
-        if (mHomePlayerFirstSetScore != null) {
-            setSetScore(mHomePlayerFirstSetScore, 0);
-            setSetScore(mHomePlayerSecondSetScore, 0);
-            setSetScore(mHomePlayerThirdSetScore, 0);
+        if (tvHomePlayerFirstSetScore != null) {
+            setSetScore(tvHomePlayerFirstSetScore, 0);
+            setSetScore(tvHomePlayerSecondSetScore, 0);
+            setSetScore(tvHomePlayerThirdSetScore, 0);
 
-            setSetScore(mAwayPlayerFirstSetScore, 0);
-            setSetScore(mAwayPlayerSecondSetScore, 0);
-            setSetScore(mAwayPlayerThirdSetScore, 0);
+            setSetScore(tvAwayPlayerFirstSetScore, 0);
+            setSetScore(tvAwayPlayerSecondSetScore, 0);
+            setSetScore(tvAwayPlayerThirdSetScore, 0);
         }
     }
 
@@ -210,28 +219,28 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
             case FIRST_SET:
                 if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
                     mHomePlayerSetOneScore += 1;
-                    setSetScore(mHomePlayerFirstSetScore, mHomePlayerSetOneScore);
+                    setSetScore(tvHomePlayerFirstSetScore, mHomePlayerSetOneScore);
                 } else {
                     mAwayPlayerSetOneScore += 1;
-                    setSetScore(mAwayPlayerFirstSetScore, mAwayPlayerSetOneScore);
+                    setSetScore(tvAwayPlayerFirstSetScore, mAwayPlayerSetOneScore);
                 }
                 break;
             case SECOND_SET:
                 if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
                     mHomePlayerSetTwoScore += 1;
-                    setSetScore(mHomePlayerSecondSetScore, mHomePlayerSetTwoScore);
+                    setSetScore(tvHomePlayerSecondSetScore, mHomePlayerSetTwoScore);
                 } else {
                     mAwayPlayerSetTwoScore += 1;
-                    setSetScore(mAwayPlayerSecondSetScore, mAwayPlayerSetTwoScore);
+                    setSetScore(tvAwayPlayerSecondSetScore, mAwayPlayerSetTwoScore);
                 }
                 break;
             case THIRD_SET:
                 if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
                     mHomePlayerSetThreeScore += 1;
-                    setSetScore(mHomePlayerThirdSetScore, mHomePlayerSetThreeScore);
+                    setSetScore(tvHomePlayerThirdSetScore, mHomePlayerSetThreeScore);
                 } else {
                     mAwayPlayerSetThreeScore += 1;
-                    setSetScore(mAwayPlayerThirdSetScore, mAwayPlayerSetThreeScore);
+                    setSetScore(tvAwayPlayerThirdSetScore, mAwayPlayerSetThreeScore);
                 }
                 break;
             case RESET:
@@ -316,9 +325,9 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     private String getMatchWinner() {
         if (mSetWonByAwayPlayer > mSetWonByHomePlayer)
-            return mAwayPlayerName.getText().toString();
+            return tvAwayPlayerName.getText().toString();
         else
-            return mHomePlayerName.getText().toString();
+            return tvHomePlayerName.getText().toString();
     }
 
     private void recordFirstSetWinner() {

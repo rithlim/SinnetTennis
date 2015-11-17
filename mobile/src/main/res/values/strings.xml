@@ -56,4 +56,17 @@
     <string name="announcement_set_three">Set 3</string>
     <string name="announcement_sub_label">sub label</string>
 
+    <!-- TUTORIAL -->
+    <string name="tutorial_announcer_label">Tutorial</string>
+    <string name="tutorial_announcer_sub_label">Basic Controls</string>
+    <string name="tutorial_touch_to_begin">Touch to begin tutorial</string>
+    <string name="tutorial_swipe_up">Swipe UP to INCREASE game score.</string>
+    <string name="tutorial_swipe_down">Swipe DOWN to DECREASE game score.</string>
+    <string name="tutorial_long_press">PRESS &amp; Hold on screen to reset GAME score.</string>
+    <string name="tutorial_lets_play">Done! Now let\'s Play!</string>
+
+    <!--LAUNCH -->
+    <string name="launch_header">@string/app_name</string>
+    <string name="launch_sub_header">FOCUS ON THE MATCH, NOT THE SCORE.</string>
+
 </resources>

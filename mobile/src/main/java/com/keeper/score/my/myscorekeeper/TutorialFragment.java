@@ -13,7 +13,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.keeper.score.common.Enum;
+import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
+import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
 
 public class TutorialFragment extends Fragment {
@@ -89,8 +91,7 @@ public class TutorialFragment extends Fragment {
     private void setupGameSetScores() {
         gameListener = (IGameListener) getActivity();
         gameListener.updateAllGameScores(homeSide, "15", awaySide, "30");
-        Log.d("Tag", "homeSide Ordinal: " + homeSide.ordinal());
-        Log.d("Tag", "awaySide Ordinal: " + awaySide.ordinal());
+        ((IAnnouncements)getActivity()).setAnnouncements("Tutorial", "Basic controls", true);
     }
 
     private void setupListeners() {
@@ -100,7 +101,8 @@ public class TutorialFragment extends Fragment {
                 public boolean onLongClick(View v) {
                     if (beginTutorial && swipeUpTutorial && swipeDownTutorial && !longGamePressTutorial) {
                         gameListener.resetGameScores();
-                        instructionLabel.setText("Let's Play!");
+                        ((ISetScore)getActivity()).resetSetScores();
+                        instructionLabel.setText(getString(R.string.tutorial_lets_play));
                         longGamePressTutorial = true;
                     }
                     return true;
@@ -120,11 +122,11 @@ public class TutorialFragment extends Fragment {
                             instructionLabel.clearAnimation();
                             if (!beginTutorial) {
                                 beginTutorial = true;
-                                instructionLabel.setText("Swipe up increases score.");
+                                instructionLabel.setText(getString(R.string.tutorial_swipe_up));
                             } else if (!swipeUpTutorial && isAcceptableGesture()) {
                                 if (yStart > yEnd) {
                                     swipeUpTutorial = true;
-                                    instructionLabel.setText("Swipe down decreases score.");
+                                    instructionLabel.setText(getString(R.string.tutorial_swipe_down));
                                     if (event.getX() <= side) {
                                         increaseHomeSide = true;
                                         gameListener.updateAllGameScores(Enum.GAME_SCORE.THIRTY, "30", Enum.GAME_SCORE.THIRTY, "30");
@@ -132,9 +134,9 @@ public class TutorialFragment extends Fragment {
                                         gameListener.updateAllGameScores(Enum.GAME_SCORE.FIFTEEN, "15", Enum.GAME_SCORE.FORTY, "40");
                                     }
                                 }
-                            } else if (!swipeDownTutorial && isAcceptableGesture()) {
+                            } else if (!swipeDownTutorial && isAcceptableGesture() && (yStart < yEnd)) {
                                 swipeDownTutorial = true;
-                                instructionLabel.setText("Long press reset GAME/SET scores.");
+                                instructionLabel.setText(getString(R.string.tutorial_long_press));
                                 if (event.getX() <= side && increaseHomeSide) {
                                     gameListener.updateAllGameScores(Enum.GAME_SCORE.FIFTEEN, "15", Enum.GAME_SCORE.THIRTY, "30");
                                 } else if (event.getX() <= side && !increaseHomeSide) {

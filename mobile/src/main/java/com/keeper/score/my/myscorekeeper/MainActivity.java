@@ -2,6 +2,7 @@ package com.keeper.score.my.myscorekeeper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
@@ -20,6 +21,7 @@ import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
+import com.keeper.score.common.ILaunch;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
@@ -30,7 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 
-public class MainActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, DialogInterface.OnDismissListener {
+public class MainActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, ILaunch, DialogInterface.OnDismissListener {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static String mCurrentGameWinner;
 
@@ -39,6 +41,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     SetScoreFragment setScoreFragment;
     AnnouncerFragment announcerFragment;
     TutorialFragment tutorialFragment;
+    LaunchFragment launchFragment;
 
     IGameListener mHomeGameCallback;
     IGameListener mAwayGameCallback;
@@ -60,7 +63,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         super.onCreate(savedInstanceState);
         View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         setContentView(view);
-        addFragment();
+        addLaunchFragment();
 //        alertIconId = R.drawable.alerticon;
         alertIconId = android.R.drawable.ic_dialog_alert;
     }
@@ -94,12 +97,19 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
 
     @Override
     public void onBackPressed() {
-        showAlert("Quit App",
-                "Are you sure you want to quit?",
-                "Yes",
-                "No",
-                null,
-                Enum.ALERT_TYPE.QUIT_APP);
+        super.onBackPressed();
+        Fragment fragment = FragmentUtils.getFragment(getFragmentManager(), R.id.main_layout);
+        Fragment launchFragment = FragmentUtils.getFragment(getFragmentManager(), LaunchFragment.class.getSimpleName());
+
+        Log.d(TAG, "TopFragment" + ((launchFragment != null) ? launchFragment.toString() : ""));
+        if(launchFragment != null)
+            getFragmentManager().popBackStack(launchFragment.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//        showAlert("Quit App",
+//                "Are you sure you want to quit?",
+//                "Yes",
+//                "No",
+//                null,
+//                Enum.ALERT_TYPE.QUIT_APP);
     }
 
     @Override
@@ -111,40 +121,15 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     @Override
     public void onStart() {
         super.onStart();
-        homeGameFragment.loadPreferences();
-        awayGameFragment.loadPreferences();
-        resetGameScores();
-        resetSetScores();
     }
 
     /***********
      * HELP METHODS
      **************/
 
-    private void addFragment() {
-        homeGameFragment = HomeGameFragment.newInstance("", "");
-        awayGameFragment = AwayGameFragment.newInstance("", "");
-        setScoreFragment = SetScoreFragment.newInstance("", "");
-        announcerFragment = AnnouncerFragment.newInstance("", "");
-
-        FragmentManager fm = getFragmentManager();
-
-//        FragmentUtils.launchFragment(fm, mainFragment, R.id.background_container, true, MainFragment.class.getSimpleName());
-//
-        FragmentUtils.launchFragment(fm, homeGameFragment, R.id.home_container, false, HomeGameFragment.class.getSimpleName());
-        FragmentUtils.launchFragment(fm, awayGameFragment, R.id.away_container, false, AwayGameFragment.class.getSimpleName());
-        FragmentUtils.launchFragment(fm, setScoreFragment, R.id.set_container, false, SetScoreFragment.class.getSimpleName());
-        FragmentUtils.launchFragment(fm, announcerFragment, R.id.main_layout, false, AnnouncerFragment.class.getSimpleName());
-
-        if (!SinnetPreferences.getBooleanPreferences(this, TutorialFragment.class.getSimpleName())) {
-            tutorialFragment = TutorialFragment.newInstance("", "");
-            FragmentUtils.launchFragment(fm, tutorialFragment, R.id.main_layout, true, TutorialFragment.class.getSimpleName());
-        }
-
-        mHomeGameCallback = homeGameFragment;
-        mAwayGameCallback = awayGameFragment;
-        mSetScoreCallback = setScoreFragment;
-        mAnnouncementCallback = announcerFragment;
+    private void addLaunchFragment() {
+        launchFragment = new LaunchFragment();
+        FragmentUtils.launchFragment(getFragmentManager(), launchFragment, R.id.main_layout, true, LaunchFragment.class.getSimpleName());
     }
 
     @Override
@@ -292,6 +277,8 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
     @Override
     public void firstSetActive() {
         mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
+        resetGameScores();
+        resetSetScores();
     }
 
     @Override
@@ -497,5 +484,37 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         FragmentManager fm = getFragmentManager();
         fm.popBackStack();
         SinnetPreferences.putPreferences(this, TutorialFragment.class.getSimpleName(), true);
+        firstSetActive();
+    }
+
+    @Override
+    public void performAction(Enum.LAUNCH_BUTTON button) {
+        switch(button) {
+            case PLAY:
+                FragmentManager fm = getFragmentManager();
+                homeGameFragment = HomeGameFragment.newInstance("", "");
+                awayGameFragment = AwayGameFragment.newInstance("", "");
+                setScoreFragment = SetScoreFragment.newInstance("", "");
+                announcerFragment = AnnouncerFragment.newInstance("", "");
+
+                FragmentUtils.launchFragment(fm, setScoreFragment, R.id.set_container, false, SetScoreFragment.class.getSimpleName());
+                FragmentUtils.launchFragment(fm, homeGameFragment, R.id.home_container, false, HomeGameFragment.class.getSimpleName());
+                FragmentUtils.launchFragment(fm, awayGameFragment, R.id.away_container, false, AwayGameFragment.class.getSimpleName());
+                FragmentUtils.launchFragment(fm, announcerFragment, R.id.main_layout, false, AnnouncerFragment.class.getSimpleName());
+
+                if (!SinnetPreferences.getBooleanPreferences(this, TutorialFragment.class.getSimpleName())) {
+                    tutorialFragment = TutorialFragment.newInstance("", "");
+                    FragmentUtils.launchFragment(fm, tutorialFragment, R.id.main_layout, true, TutorialFragment.class.getSimpleName());
+                }
+
+                mHomeGameCallback = homeGameFragment;
+                mAwayGameCallback = awayGameFragment;
+                mSetScoreCallback = setScoreFragment;
+                mAnnouncementCallback = announcerFragment;
+
+                break;
+            case STATISTICS:
+                break;
+        }
     }
 }

@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFF</color>
     <color name="gray">#8484ad</color>
+    <color name="black">#000</color>
     <color name="server_receiver_label_color">#00002A</color>
     <color name="player_name_label_color">#00002A</color>
     <color name="home_game_score_label_color">#00008B</color>
@@ -24,4 +25,6 @@
 
     <color name="tennis_ball_green">#8484ad</color>
     <color name="tennis_ball_green_shadow">#000000</color>
+
+    <color name="launch_background">#99bbff</color>
 </resources>

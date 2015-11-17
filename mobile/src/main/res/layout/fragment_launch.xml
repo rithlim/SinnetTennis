@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/launch_background"
+    android:clickable="true"
+    android:orientation="vertical"
+    tools:context="com.keeper.score.my.myscorekeeper.LaunchFragment">
+
+    <TextView
+        android:id="@+id/launch_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:shadowColor="@color/gray"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="6"
+        android:text="@string/launch_header"
+        android:textColor="@color/white"
+        android:textSize="100dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/launch_sub_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/launch_header"
+        android:layout_centerHorizontal="true"
+        android:maxLines="2"
+        android:shadowColor="@color/gray"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="6"
+        android:text="@string/launch_sub_header"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/launch_play_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/statistics_button"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:shadowColor="@color/gray"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="6"
+        android:text="PLAY"
+        android:textColor="@color/white"
+        android:textSize="@dimen/launch_button_normal" />
+
+    <TextView
+        android:id="@+id/statistics_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/app_version"
+        android:layout_centerHorizontal="true"
+        android:clickable="true"
+        android:gravity="center"
+        android:shadowColor="@color/gray"
+        android:shadowDx="3"
+        android:shadowDy="3"
+        android:shadowRadius="6"
+        android:text="STATISTICS"
+        android:textColor="@color/white"
+        android:textSize="@dimen/launch_button_normal" />
+
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="35dp"
+        android:padding="5dp"
+        android:textSize="10dp"
+        android:text="v1.0.0"
+        android:textColor="@color/gray" />
+
+</RelativeLayout>

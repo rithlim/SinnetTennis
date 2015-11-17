@@ -22,7 +22,7 @@
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="2"
-        android:text="Touch to begin tutorial"
+        android:text="@string/tutorial_touch_to_begin"
         android:textStyle="bold|italic"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20dp" />
