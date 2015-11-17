@@ -23,5 +23,7 @@
         <attr name="labelSize" format="dimension"/>
         <attr name="home_labelColor" format="color"/>
         <attr name="away_labelColor" format="color"/>
+        <attr name="set_box_hw" format="dimension"/>
+        <attr name="set_label_size" format="dimension"/>
     </declare-styleable>
 </resources>

@@ -61,7 +61,6 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         View view = getLayoutInflater().inflate(R.layout.activity_main, null);
         setContentView(view);
         addFragment();
-        resetSetScores();
 //        alertIconId = R.drawable.alerticon;
         alertIconId = android.R.drawable.ic_dialog_alert;
     }
@@ -114,6 +113,8 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
         super.onStart();
         homeGameFragment.loadPreferences();
         awayGameFragment.loadPreferences();
+        resetGameScores();
+        resetSetScores();
     }
 
     /***********
@@ -158,7 +159,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
 
         setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
         mSetScoreCallback.resetSetScores();
-        updateAlertId(R.drawable.alerticon);
+        //updateAlertId(R.drawable.alerticon);
         setAnnouncements(getString(R.string.announcement_set_one), "", false);
     }
 
@@ -222,7 +223,7 @@ public class MainActivity extends Activity implements IGameListener, IServer, IS
 
     @Override
     public void resetGameScores() {
-        updateAlertId(R.drawable.alerticon);
+        //updateAlertId(R.drawable.alerticon);
         mHomeGameCallback.resetGameScores();
         mAwayGameCallback.resetGameScores();
     }

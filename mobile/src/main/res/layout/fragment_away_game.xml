@@ -21,10 +21,14 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingRight="@dimen/player_name_label_padding"
+            android:shadowColor="@color/gray"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="6"
             android:text="@string/player_two_label"
             android:textColor="@color/away_game_score_label_color"
-            android:textStyle="bold|italic"
             android:textSize="@dimen/player_name_label_size"
+            android:textStyle="bold|italic"
             android:visibility="visible" />
 
         <EditText
@@ -55,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:shadowColor="@color/tennis_ball_green_shadow"
+            android:shadowColor="@color/gray"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="2"
@@ -77,8 +81,8 @@
             android:layout_gravity="center"
             android:text="@string/receiver_label"
             android:textColor="@color/server_receiver_label_color"
-            android:textStyle="bold"
-            android:textSize="@dimen/server_receiver_label_size" />
+            android:textSize="@dimen/server_receiver_label_size"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
 

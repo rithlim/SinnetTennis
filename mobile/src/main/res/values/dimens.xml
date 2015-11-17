@@ -11,8 +11,14 @@
     <dimen name="player_name_label_size">17dp</dimen>
     <dimen name="player_name_label_padding">10dp</dimen>
     <dimen name="player_name_edit_text_size">15dp</dimen>
-    <dimen name="player_name_set_label_size">22dp</dimen>
+    <dimen name="player_name_set_label_size">20dp</dimen>
 
     <dimen name="announcement_label_size">35dp</dimen>
     <dimen name="announcement_sub_label_size">20dp</dimen>
+
+    <!-- Set Score -->
+    <dimen name="set_box_height_width_dimen">40dp</dimen>
+    <dimen name="set_score_label_size">35dp</dimen>
+    <dimen name="set_box_layout_padding">2dp</dimen>
+    <dimen name="set_frame_player_label_size">20dp</dimen>
 </resources>

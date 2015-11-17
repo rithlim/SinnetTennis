@@ -36,6 +36,7 @@ public class SetScoreTableView extends View implements IPlayers {
     private float mBorderPadding = 0f;
     private float mTextSize = 0.0f;
     private int mSetScoreFontSize = 15;
+    private float mSetLabelFontSize=0f;
 
     private boolean mShowText = false;
 
@@ -58,7 +59,7 @@ public class SetScoreTableView extends View implements IPlayers {
 
     private static int startXPosBoxes;
     private static int startYPosBoxes;
-    private static int boxWidthHeight = 150;
+    private static float boxWidthHeight = 0;
     private static int xSetBoxPadding = 220;
     private static int ySetBoxPadding = 20;
     private static int ySetBoxPlayerNamePadding = 50;
@@ -81,6 +82,8 @@ public class SetScoreTableView extends View implements IPlayers {
             setHomeFirstSetScore(a.getInteger(R.styleable.SetScoreTableView_first_setScore, 0));
             setHomeSecondSetScore(a.getInteger(R.styleable.SetScoreTableView_second_setScore, 0));
             setHomeThirdSetScore(a.getInteger(R.styleable.SetScoreTableView_third_setScore, 0));
+            mSetLabelFontSize = a.getDimension(R.styleable.SetScoreTableView_set_label_size, 0);
+            boxWidthHeight = a.getDimension(R.styleable.SetScoreTableView_set_box_hw, 0);
             //This does not invalidate nor request layout. Maybe image will not refresh if modified during runtime?
             mTextSize = a.getDimension(R.styleable.SetScoreTableView_labelSize, 0.0f);
             mHomeTextColor = a.getColor(R.styleable.SetScoreTableView_home_labelColor, 0xff000000);
@@ -120,6 +123,7 @@ public class SetScoreTableView extends View implements IPlayers {
         mSetLabelPaint.setColor(0xffCC3300);
         mSetLabelPaint.setTextAlign(Paint.Align.CENTER);
         mSetLabelPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        mSetLabelPaint.setTextSize(mSetLabelFontSize);
 
         //Set Score Label
         mHomeSetScoreLabelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -174,7 +178,6 @@ public class SetScoreTableView extends View implements IPlayers {
         //Font Sizes
         mHomePlayerLabelPaint.setTextSize(mTextSize);
         mAwayPlayerLabelPaint.setTextSize(mTextSize);
-        mSetLabelPaint.setTextSize(mTextSize - 25);
         mHomeSetScoreLabelPaint.setTextSize(mTextSize * 2);
         mAwaySetScoreLabelPaint.setTextSize(mTextSize * 2);
     }
@@ -202,7 +205,7 @@ public class SetScoreTableView extends View implements IPlayers {
         canvas.drawText(getHomePlayerName(), startXPosBoxes - ySetBoxPlayerNamePadding, startYPosBoxes + yPlayerLabelOffset, mHomePlayerLabelPaint);
 
         //Away Player Name
-        int yPosAwayPlayerLabel = startYPosBoxes + boxWidthHeight + ySetBoxPadding + yPlayerLabelOffset;
+        int yPosAwayPlayerLabel = startYPosBoxes + (int)boxWidthHeight + ySetBoxPadding + yPlayerLabelOffset;
         canvas.drawText(getAwayPlayerName(), startXPosBoxes - ySetBoxPlayerNamePadding, yPosAwayPlayerLabel, mAwayPlayerLabelPaint);
 
         //Border
@@ -239,8 +242,8 @@ public class SetScoreTableView extends View implements IPlayers {
         //Home First Set Box
         int left = startXPosBoxes;
         int top = startYPosBoxes;
-        int right = left + boxWidthHeight;
-        int bottom = top + boxWidthHeight;
+        int right = left + (int)boxWidthHeight;
+        int bottom = top + (int)boxWidthHeight;
         homeFirstSetBox.set(left, top, right, bottom);
 
         //Home Second Set Box
@@ -256,8 +259,8 @@ public class SetScoreTableView extends View implements IPlayers {
         //Away First Set Box
         left = startXPosBoxes;
         top = bottom + ySetBoxPadding;
-        right = left + boxWidthHeight;
-        bottom = top + boxWidthHeight;
+        right = left + (int)boxWidthHeight;
+        bottom = top + (int)boxWidthHeight;
         awayFirstSetBox.set(left, top, right, bottom);
 
         //Away Second Set Box
