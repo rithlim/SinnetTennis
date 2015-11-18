@@ -35,40 +35,5 @@ public class LaunchActivity extends AppCompatActivity implements ILaunch{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        showAlert("Quit App",
-//                "Are you sure you want to quit?",
-//                "Yes",
-//                "No",
-//                null,
-//                Enum.ALERT_TYPE.QUIT_APP);
-    }
-
-    public void showAlert(String title, String msg, String posBtnText, String negBtnTxt, String neutralBtnText, final Enum.ALERT_TYPE alertType) {
-          AlertDialog.Builder myDialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setCancelable(false)
-                .setMessage(msg)
-                .setPositiveButton(posBtnText, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (alertType) {
-                            case QUIT_APP:
-                                finish();
-                                break;
-                        }
-                    }
-                })
-                .setNegativeButton(negBtnTxt, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .setIcon(android.R.drawable.ic_dialog_alert);
-        if (neutralBtnText != null && !neutralBtnText.isEmpty()) {
-            myDialog.setNeutralButton(neutralBtnText, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                }
-            });
-        }
-        myDialog.show();
     }
 }
