@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,15 +28,17 @@ public class TutorialFragment extends Fragment {
     private String mParam2;
     private TextView instructionLabel;
     private View view;
+    private View setBoardView;
 
     private IGameListener gameListener;
 
-    private boolean endTutorial = false;
-    private boolean beginTutorial = false;
-    private boolean swipeUpTutorial = false;
-    private boolean swipeDownTutorial = false;
-    private boolean longGamePressTutorial = false;
-    private boolean increaseHomeSide = false;
+    private boolean endTutorialComplete = false;
+    private boolean beginTutorialComplete = false;
+    private boolean swipeUpTutorialComplete = false;
+    private boolean swipeDownTutorialComplete = false;
+    private boolean resetGameTutorialComplete = false;
+    private boolean resetSetTutorialComplete = false;
+    private boolean increaseHomeSideComplete = false;
 
     private Enum.GAME_SCORE homeSide = Enum.GAME_SCORE.FIFTEEN;
     private Enum.GAME_SCORE awaySide = Enum.GAME_SCORE.THIRTY;
@@ -81,6 +82,7 @@ public class TutorialFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tutorial, container, false);
+        setBoardView = view.findViewById(R.id.set_tutorial_container);
         instructionLabel = (TextView) view.findViewById(R.id.tutorial_label);
         animateTextView();
         setupGameSetScores();
@@ -89,21 +91,56 @@ public class TutorialFragment extends Fragment {
     }
 
     private void setupGameSetScores() {
+        ISetScore setListener = (ISetScore) getActivity();
+        setListener.updateSetScores(HomeGameFragment.class.getSimpleName());
+        setListener.updateSetScores(HomeGameFragment.class.getSimpleName());
+
+        //First Set
+        for (int i = 0; i < 6; i++) {
+            setListener.updateSetScores(AwayGameFragment.class.getSimpleName());
+        }
+
+        //Second Set
+        setListener.secondSetActive();
+        for (int i = 0; i < 4; i++) {
+            setListener.updateSetScores(AwayGameFragment.class.getSimpleName());
+        }
+        for (int i = 0; i < 5; i++) {
+            setListener.updateSetScores(HomeGameFragment.class.getSimpleName());
+        }
+
         gameListener = (IGameListener) getActivity();
         gameListener.updateAllGameScores(homeSide, "15", awaySide, "30");
-        ((IAnnouncements)getActivity()).setAnnouncements("Tutorial", "Basic controls", true);
+        ((IAnnouncements) getActivity()).setAnnouncements(getString(R.string.tutorial_announcer_label), getString(R.string.tutorial_announcer_sub_label), true);
     }
 
     private void setupListeners() {
         if (view != null) {
+
+            setBoardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (resetGameTutorialComplete && !resetSetTutorialComplete) {
+                        ((ISetScore) getActivity()).resetSetScores();
+                        ((IAnnouncements) getActivity()).setAnnouncements(getString(R.string.tutorial_announcer_complete), getString(R.string.tutorial_announcer_complete_sub_header), true);
+                        instructionLabel.setText(getString(R.string.tutorial_lets_play));
+                        animateTextView();
+                        //instructionLabel.setText(getString(R.string.tutorial_lets_play));
+                        endTutorialComplete = true;
+                        resetSetTutorialComplete = true;
+                    }
+                    return true;
+                }
+            });
+
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if (beginTutorial && swipeUpTutorial && swipeDownTutorial && !longGamePressTutorial) {
+                    if (swipeDownTutorialComplete && !resetGameTutorialComplete) {
                         gameListener.resetGameScores();
-                        ((ISetScore)getActivity()).resetSetScores();
-                        instructionLabel.setText(getString(R.string.tutorial_lets_play));
-                        longGamePressTutorial = true;
+                        instructionLabel.setText(getString(R.string.tutorial_reset_set));
+                        //instructionLabel.setText(getString(R.string.tutorial_lets_play));
+                        resetGameTutorialComplete = true;
                     }
                     return true;
                 }
@@ -120,36 +157,35 @@ public class TutorialFragment extends Fragment {
                         case (MotionEvent.ACTION_UP):
                             yEnd = event.getY();
                             instructionLabel.clearAnimation();
-                            if (!beginTutorial) {
-                                beginTutorial = true;
+                            if (!beginTutorialComplete) {
+                                beginTutorialComplete = true;
                                 instructionLabel.setText(getString(R.string.tutorial_swipe_up));
-                            } else if (!swipeUpTutorial && isAcceptableGesture()) {
+                            } else if (!swipeUpTutorialComplete && isAcceptableGesture()) {
                                 if (yStart > yEnd) {
-                                    swipeUpTutorial = true;
+                                    swipeUpTutorialComplete = true;
                                     instructionLabel.setText(getString(R.string.tutorial_swipe_down));
-                                    if (event.getX() <= side) {
-                                        increaseHomeSide = true;
+                                    if (event.getX() >= side) {
+                                        increaseHomeSideComplete = true;
                                         gameListener.updateAllGameScores(Enum.GAME_SCORE.THIRTY, "30", Enum.GAME_SCORE.THIRTY, "30");
                                     } else {
                                         gameListener.updateAllGameScores(Enum.GAME_SCORE.FIFTEEN, "15", Enum.GAME_SCORE.FORTY, "40");
                                     }
                                 }
-                            } else if (!swipeDownTutorial && isAcceptableGesture() && (yStart < yEnd)) {
-                                swipeDownTutorial = true;
-                                instructionLabel.setText(getString(R.string.tutorial_long_press));
-                                if (event.getX() <= side && increaseHomeSide) {
+                            } else if (!swipeDownTutorialComplete && isAcceptableGesture() && (yStart < yEnd)) {
+                                swipeDownTutorialComplete = true;
+                                instructionLabel.setText(getString(R.string.tutorial_reset_game));
+                                if (event.getX() >= side && increaseHomeSideComplete) {
                                     gameListener.updateAllGameScores(Enum.GAME_SCORE.FIFTEEN, "15", Enum.GAME_SCORE.THIRTY, "30");
-                                } else if (event.getX() <= side && !increaseHomeSide) {
+                                } else if (event.getX() >= side && !increaseHomeSideComplete) {
                                     gameListener.updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.FORTY, "40");
-                                } else if (event.getX() >= side && !increaseHomeSide) {
+                                } else if (event.getX() <= side && !increaseHomeSideComplete) {
                                     gameListener.updateAllGameScores(Enum.GAME_SCORE.FIFTEEN, "15", Enum.GAME_SCORE.THIRTY, "30");
                                 } else {
                                     gameListener.updateAllGameScores(Enum.GAME_SCORE.THIRTY, "30", Enum.GAME_SCORE.FIFTEEN, "15");
                                 }
-                            } else if (longGamePressTutorial && !endTutorial) {
-                                animateTextView();
-                                endTutorial = true;
-                            } else if (endTutorial) {
+                            } else if (resetGameTutorialComplete && !resetSetTutorialComplete) {
+                                resetGameTutorialComplete = true;
+                            } else if (endTutorialComplete) {
                                 ((ITutorial) getActivity()).endTutorial();
                             }
                             break;

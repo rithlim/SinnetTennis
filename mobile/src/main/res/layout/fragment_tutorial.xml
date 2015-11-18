@@ -4,11 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alpha="0.7"
-    android:background="@android:color/white"
+    android:background="@android:color/transparent"
     android:clickable="true"
     tools:context="com.keeper.score.my.myscorekeeper.TutorialFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <FrameLayout
+        android:id="@+id/set_tutorial_container"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent"></FrameLayout>
+
     <TextView
         android:id="@+id/tutorial_label"
         android:layout_width="wrap_content"
@@ -16,6 +24,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:maxLines="4"
+        android:layout_weight="1"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:shadowColor="@android:color/white"

@@ -1,10 +1,5 @@
 package com.keeper.score.common;
 
-import android.app.Application;
-
-import com.keeper.score.my.myscorekeeper.MainActivity;
-import com.keeper.score.my.myscorekeeper.R;
-
 /**
  * Created by Rith on 10/31/2015.
  */
@@ -42,6 +37,7 @@ public class Enum {
         CONFIRM_GAME_SCORE,
         SCORING_SYSTEM,
         GAME_SET_MATCH,
+        END_MATCH,
         QUIT_APP
     }
 

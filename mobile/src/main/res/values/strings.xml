@@ -37,7 +37,8 @@
     <string name="game_set_match_title">Game Set Match</string>
     <string name="game_set_match_msg">&#160;wins!</string>
     <string name="game_set_match_pos_btn">New Match</string>
-    <string name="game_set_match_snapshot_btn">Snapshot</string>
+    <string name="game_set_match_track_score_btn">Track Score</string>
+    <string name="game_set_match_end_match_btn">End Match</string>
     <string name="quit_btn">Quit App</string>
 
     <string name="positive_btn_text">Confirm</string>
@@ -58,15 +59,19 @@
 
     <!-- TUTORIAL -->
     <string name="tutorial_announcer_label">Tutorial</string>
-    <string name="tutorial_announcer_sub_label">Basic Controls</string>
-    <string name="tutorial_touch_to_begin">Touch to begin tutorial</string>
+    <string name="tutorial_announcer_complete">Tutorial Complete</string>
+    <string name="tutorial_announcer_complete_sub_header">Good Job!</string>
+    <string name="tutorial_announcer_sub_label">Some Basic Controls</string>
+    <string name="tutorial_touch_to_begin">Touch here to begin tutorial</string>
     <string name="tutorial_swipe_up">Swipe UP to INCREASE game score.</string>
-    <string name="tutorial_swipe_down">Swipe DOWN to DECREASE game score.</string>
-    <string name="tutorial_long_press">PRESS &amp; Hold on screen to reset GAME score.</string>
-    <string name="tutorial_lets_play">Done! Now let\'s Play!</string>
+    <string name="tutorial_swipe_down">Swipe DOWN to DECREASE game score before deuce.</string>
+    <string name="tutorial_reset_game">PRESS &amp; HOLD on game board to reset GAME score.</string>
+    <string name="tutorial_reset_set">PRESS &amp; HOLD on set board to reset SET score.</string>
+    <string name="tutorial_lets_play">Now let\'s play!</string>
 
     <!--LAUNCH -->
     <string name="launch_header">@string/app_name</string>
     <string name="launch_sub_header">FOCUS ON THE MATCH, NOT THE SCORE.</string>
+    <string name="title_activity_launch">LaunchActivity</string>
 
 </resources>

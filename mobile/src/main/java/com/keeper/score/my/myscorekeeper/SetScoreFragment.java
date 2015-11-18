@@ -309,13 +309,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
                     Enum.ALERT_TYPE.SCORING_SYSTEM);
         } else {
             //MainActivity.updateAlertId(R.drawable.trophy72);
-            ((IAlertDialog) getActivity()).showAlert(
-                    getString(R.string.game_set_match_title),
-                    getMatchWinner() + getString(R.string.game_set_match_msg),
-                    getString(R.string.game_set_match_pos_btn),
-                    getString(R.string.confirm_win_neg_btn),
-                    getString(R.string.quit_btn),
-                    Enum.ALERT_TYPE.GAME_SET_MATCH);
+            endGameSetMatch(getMatchWinner());
         }
     }
 

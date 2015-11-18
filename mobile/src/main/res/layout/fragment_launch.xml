@@ -54,6 +54,14 @@
         android:textColor="@color/white"
         android:textSize="@dimen/launch_button_normal" />
 
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/launch_sub_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/sinnet" />
+
     <TextView
         android:id="@+id/statistics_button"
         android:layout_width="150dp"
@@ -78,8 +86,8 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="35dp"
         android:padding="5dp"
-        android:textSize="10dp"
         android:text="v1.0.0"
-        android:textColor="@color/gray" />
+        android:textColor="@color/gray"
+        android:textSize="10dp" />
 
 </RelativeLayout>
