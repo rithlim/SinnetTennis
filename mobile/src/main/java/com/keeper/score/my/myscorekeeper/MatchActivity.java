@@ -55,8 +55,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         View view = getLayoutInflater().inflate(R.layout.activity_match, null);
         setContentView(view);
         addLaunchFragment();
-//        alertIconId = R.drawable.alerticon;
-        alertIconId = android.R.drawable.ic_dialog_alert;
+        alertIconId = R.drawable.ic_blue_alert;
     }
 
     @Override
@@ -89,7 +88,11 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     @Override
     public void onBackPressed() {
         boolean didFinishTutorial = SinnetPreferences.getBooleanPreferences(this, TutorialFragment.class.getSimpleName());
-        if(didFinishTutorial) {
+        Enum.GAME_SCORE homeGameScore = mHomeGameCallback.getGameScore();
+        Enum.GAME_SCORE awayGameScore = mAwayGameCallback.getGameScore();
+        boolean loveGame = (homeGameScore.equals(Enum.GAME_SCORE.LOVE) && awayGameScore.equals(Enum.GAME_SCORE.LOVE));
+
+        if(didFinishTutorial && (!loveGame || !SetScoreFragment.mIsNewMatch)) {
             showAlert("End Match?",
                     "All scores will be lost. Are you sure you want to end the match?",
                     "Yes",
@@ -144,7 +147,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     public void resetSetScores() {
         setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
         mSetScoreCallback.resetSetScores();
-        //updateAlertId(R.drawable.alerticon);
+        updateAlertId(R.drawable.ic_blue_alert);
         setAnnouncements(getString(R.string.announcement_set_one), "", false);
     }
 
@@ -270,7 +273,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                 winner + getString(R.string.game_set_match_msg),
                 getString(R.string.game_set_match_pos_btn),
                 getString(R.string.game_set_match_track_score_btn),
-                getString(R.string.game_set_match_end_match_btn),
+                null,
                 Enum.ALERT_TYPE.GAME_SET_MATCH);
     }
 
@@ -403,11 +406,6 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                             dialog.dismiss();
                             break;
                         case SCORING_SYSTEM:
-                            break;
-                        case GAME_SET_MATCH:
-                            resetGameScores();
-                            resetSetScores();
-                            finish();
                             break;
                         default:
                             setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);

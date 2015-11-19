@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/record_home_player_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_home_player_name_label" />
+
+    <TextView
+        android:id="@+id/record_away_player_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_away_player_name_label" />
+
+    <TextView
+        android:id="@+id/record_match_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_match_date" />
+
+    <TextView
+        android:id="@+id/record_home_first_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_home_first_set_score" />
+
+    <TextView
+        android:id="@+id/record_home_second_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_home_second_set_score" />
+
+    <TextView
+        android:id="@+id/record_home_third_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_home_third_set_score" />
+
+    <TextView
+        android:id="@+id/record_away_first_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_away_first_set_score" />
+
+    <TextView
+        android:id="@+id/record_away_second_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_away_second_set_score"/>
+
+    <TextView
+        android:id="@+id/record_away_third_set_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="record_away_third_set_score" />
+
+</LinearLayout>

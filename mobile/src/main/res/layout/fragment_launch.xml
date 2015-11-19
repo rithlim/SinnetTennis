@@ -50,7 +50,7 @@
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="6"
-        android:text="PLAY"
+        android:text="@string/launch_new_match"
         android:textColor="@color/white"
         android:textSize="@dimen/launch_button_normal" />
 
@@ -76,7 +76,7 @@
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="6"
-        android:text="STATISTICS"
+        android:text="@string/launch_records"
         android:textColor="@color/white"
         android:textSize="@dimen/launch_button_normal" />
 

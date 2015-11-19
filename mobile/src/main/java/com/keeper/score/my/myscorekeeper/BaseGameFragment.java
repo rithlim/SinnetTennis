@@ -19,7 +19,7 @@ import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.IScore;
-import com.keeper.score.common.IScoreKeeper;
+import com.keeper.score.common.IGameScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.SinnetPreferences;
@@ -27,7 +27,7 @@ import com.keeper.score.common.SinnetPreferences;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class BaseGameFragment extends Fragment implements IScoreKeeper, IGameListener, IServer {
+public abstract class BaseGameFragment extends Fragment implements IGameScoreKeeper, IGameListener, IServer {
     private final String TAG = this.getClass().getSimpleName();
 
     private Enum.GAME_SCORE mGameScore = Enum.GAME_SCORE.LOVE;
@@ -49,7 +49,7 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
 
     IGameListener mGameListener;
     IServer mServerListener;
-    IScoreKeeper mScoreKeeper;
+    IGameScoreKeeper mScoreKeeper;
     ISetScore mSetScoreListener;
     private boolean mIsServer;
 
@@ -95,7 +95,7 @@ public abstract class BaseGameFragment extends Fragment implements IScoreKeeper,
     }
 
     @Override
-    public void setKeeper(IScoreKeeper scoreKeeper) {
+    public void setKeeper(IGameScoreKeeper scoreKeeper) {
         mScoreKeeper = scoreKeeper;
     }
 

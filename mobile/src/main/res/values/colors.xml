@@ -13,7 +13,7 @@
     <color name="away_game_score_label_color">#004417</color>
     <color name="away_game_score_label_shadow_color">#FFFFFF</color>
     <color name="home_background_color">#FFFFFF</color>
-    <color name="away_background_color">#E5FFEE</color>
+    <color name="away_background_color">#99bbff</color>
     <color name="set_score_background_color">#E0E0EB</color>
 
     <color name="seafoam">#ffc6f9e5</color>

@@ -52,6 +52,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     private static Enum.CURRENT_SET mCurrentSet;
 
     private static boolean mTieBreakerMode;
+    public static boolean mIsNewMatch = true;
 
     private ISetScore setScoreCallback;
 
@@ -185,6 +186,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     @Override
     public void resetSetScores() {
+        mIsNewMatch = true;
         mHomePlayerSetOneScore = 0;
         mHomePlayerSetTwoScore = 0;
         mHomePlayerSetThreeScore = 0;
@@ -217,6 +219,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     public void updateSetScores(String tag) {
         switch (mCurrentSet) {
             case FIRST_SET:
+                mIsNewMatch = false;
                 if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
                     mHomePlayerSetOneScore += 1;
                     setSetScore(tvHomePlayerFirstSetScore, mHomePlayerSetOneScore);
@@ -278,7 +281,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     @Override
     public void endGameSetMatch(String winner) {
-        //MainActivity.updateAlertId(R.drawable.trophy72);
+        MatchActivity.updateAlertId(R.drawable.ic_trophy);
         setScoreCallback.endGameSetMatch(winner);
     }
 
@@ -308,7 +311,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
                     null,
                     Enum.ALERT_TYPE.SCORING_SYSTEM);
         } else {
-            //MainActivity.updateAlertId(R.drawable.trophy72);
+            MatchActivity.updateAlertId(R.drawable.ic_trophy);
             endGameSetMatch(getMatchWinner());
         }
     }

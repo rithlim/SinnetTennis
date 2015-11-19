@@ -14,7 +14,6 @@
 
     <string name="player_rith_name">Rith Lim</string>
     <string name="player_kim_name">Kim Ta Lim</string>
-    <string name="player_lim_name">Lim</string>
     <string name="player_jason_name">Jason Kruske</string>
 
     <!-- ALERT DIALOG STRINGS -->
@@ -24,7 +23,7 @@
     <string name="reset_set_title">Set Score</string>
     <string name="reset_set_msg">Reset SET scores?</string>
 
-    <string name="confirm_win_title">&#160;Win!!</string>
+    <string name="confirm_win_title">&#160;win!</string>
     <string name="confirm_win_msg">&#160;wins game.</string>
     <string name="confirm_win_neg_btn">Cancel</string>
     <string name="confirm_win_neutral_btn">Reset Game</string>
@@ -38,7 +37,6 @@
     <string name="game_set_match_msg">&#160;wins!</string>
     <string name="game_set_match_pos_btn">New Match</string>
     <string name="game_set_match_track_score_btn">Track Score</string>
-    <string name="game_set_match_end_match_btn">End Match</string>
     <string name="quit_btn">Quit App</string>
 
     <string name="positive_btn_text">Confirm</string>
@@ -48,7 +46,6 @@
     <string name="toast_starting_1st_set">Start Set 1</string>
     <string name="toast_starting_2nd_set">Start Set 2</string>
     <string name="toast_starting_3rd_set">Start Set 3</string>
-    <string name="toast_starting_new_match">Game Set Match!! Restarting.</string>
     <string name="title_activity_announcer">Announcer</string>
 
     <!-- ANNOUNCEMENT LABEL -->
@@ -67,11 +64,13 @@
     <string name="tutorial_swipe_down">Swipe DOWN to DECREASE game score before deuce.</string>
     <string name="tutorial_reset_game">PRESS &amp; HOLD on game board to reset GAME score.</string>
     <string name="tutorial_reset_set">PRESS &amp; HOLD on set board to reset SET score.</string>
-    <string name="tutorial_lets_play">Now let\'s play!</string>
+    <string name="tutorial_lets_play">Begin Match!</string>
 
     <!--LAUNCH -->
     <string name="launch_header">@string/app_name</string>
     <string name="launch_sub_header">FOCUS ON THE MATCH, NOT THE SCORE.</string>
     <string name="title_activity_launch">LaunchActivity</string>
+    <string name="launch_new_match">NEW MATCH</string>
+    <string name="launch_records">RECORDS</string>
 
 </resources>
