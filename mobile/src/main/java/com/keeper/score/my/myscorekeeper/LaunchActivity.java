@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.keeper.score.common.ILaunch;
 import com.keeper.score.utils.FragmentUtils;
@@ -28,11 +29,12 @@ public class LaunchActivity extends AppCompatActivity implements ILaunch {
                 startActivity(intent);
                 break;
             case MATCH_RECORD_LIST:
-
                 if(MatchRecordManager.loadMatchRecordList(this)) {
                     Log.d(TAG, "MatchRecordList loaded.");
                     intent = new Intent(this, MatchRecordListActivity.class);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(this, "No Records", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

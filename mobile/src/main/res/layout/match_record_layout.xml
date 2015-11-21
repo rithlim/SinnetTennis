@@ -1,61 +1,314 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    tools:context="com.keeper.score.my.myscorekeeper.SetScoreFragment">
 
-    <TextView
-        android:id="@+id/record_home_player_name_label"
+    <RelativeLayout
+        android:id="@+id/home_player_set_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="record_home_player_name_label" />
+        android:padding="10dp"
+        android:background="@color/set_score_background_color"
+        android:gravity="left">
 
-    <TextView
-        android:id="@+id/record_away_player_name_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_away_player_name_label" />
+        <!-- Third Set Box -->
+        <LinearLayout
+            android:id="@+id/set_frame_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
 
-    <TextView
-        android:id="@+id/record_match_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_match_date" />
+            <!-- Set 3 Label -->
+            <TextView
+                android:id="@+id/third_set_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:shadowColor="@color/gray"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="Set 3"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/record_home_first_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_home_first_set_score" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Home -->
+                <ImageView
+                    android:id="@+id/home_third_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2blue72" />
 
-    <TextView
-        android:id="@+id/record_home_second_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_home_second_set_score" />
+                <TextView
+                    android:id="@+id/record_home_third_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="3"
+                    android:textColor="@color/home_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/record_home_third_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_home_third_set_score" />
 
-    <TextView
-        android:id="@+id/record_away_first_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_away_first_set_score" />
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Away -->
+                <ImageView
+                    android:id="@+id/away_third_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2green72" />
 
-    <TextView
-        android:id="@+id/record_away_second_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_away_second_set_score"/>
+                <TextView
+                    android:id="@+id/record_away_third_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="6"
+                    android:textColor="@color/away_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
 
-    <TextView
-        android:id="@+id/record_away_third_set_score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="record_away_third_set_score" />
+        </LinearLayout>
 
+        <!-- Second Set Box -->
+        <LinearLayout
+            android:id="@+id/set_frame_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/set_frame_third"
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
+
+            <!-- Set 3 Label -->
+            <TextView
+                android:id="@+id/second_set_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:shadowColor="@color/gray"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="Set 2"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Home -->
+                <ImageView
+                    android:id="@+id/home_second_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2blue72" />
+
+                <TextView
+                    android:id="@+id/record_home_second_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="6"
+                    android:textColor="@color/home_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Away -->
+                <ImageView
+                    android:id="@+id/away_second_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2green72" />
+
+                <TextView
+                    android:id="@+id/record_away_second_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="4"
+                    android:textColor="@color/away_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <!-- First Set Box -->
+        <LinearLayout
+            android:id="@+id/set_frame_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/set_frame_second"
+            android:orientation="vertical">
+
+            <!-- Set 3 Label -->
+            <TextView
+                android:id="@+id/first_set_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:shadowColor="@color/gray"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="Set 1"
+                android:textColor="@android:color/holo_red_dark"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Home -->
+                <ImageView
+                    android:id="@+id/home_first_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2blue72" />
+
+                <TextView
+                    android:id="@+id/record_home_first_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="5"
+                    android:textColor="@color/home_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <!-- Away -->
+                <ImageView
+                    android:id="@+id/away_first_set_set_layout"
+                    android:layout_width="@dimen/set_box_height_width_dimen"
+                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_gravity="center"
+                    android:src="@drawable/p2green72" />
+
+                <TextView
+                    android:id="@+id/record_away_first_set_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:shadowColor="@color/gray"
+                    android:shadowDx="3"
+                    android:shadowDy="3"
+                    android:shadowRadius="6"
+                    android:text="6"
+                    android:textColor="@color/away_game_score_label_color"
+                    android:textSize="@dimen/set_score_label_size"
+                    android:textStyle="bold" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/player_name_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/set_frame_first"
+            android:gravity="right"
+            android:orientation="vertical"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/record_home_player_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:shadowColor="@color/gray"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="@string/player_one_label"
+                android:textColor="@color/home_game_score_label_color"
+                android:textSize="@dimen/set_frame_player_label_size"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/record_away_player_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:shadowColor="@color/gray"
+                android:shadowDx="3"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="@string/player_two_label"
+                android:textColor="@color/away_game_score_label_color"
+                android:textSize="@dimen/set_frame_player_label_size"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingRight="15dp"
+            android:layout_toLeftOf="@id/player_name_frame">
+
+            <TextView
+                android:id="@+id/record_match_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

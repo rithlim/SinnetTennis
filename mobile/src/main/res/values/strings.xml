@@ -36,8 +36,8 @@
     <string name="game_set_match_title">Game Set Match</string>
     <string name="game_set_match_msg">&#160;wins!</string>
     <string name="game_set_match_pos_btn">New Match</string>
-    <string name="game_set_match_save_score_btn">Save Match</string>
-    <string name="quit_btn">Quit App</string>
+    <string name="game_set_match_save_score_btn">Save Score</string>
+    <string name="home_btn">Home</string>
 
     <string name="positive_btn_text">Confirm</string>
     <string name="negative_btn_text">Cancel</string>

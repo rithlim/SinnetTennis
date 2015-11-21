@@ -178,11 +178,11 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
                 }
             });
 
-            tvHomePlayerFirstSetScore.setOnClickListener(new View.OnClickListener(){
+            tvHomePlayerFirstSetScore.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    
+
                 }
             });
         }
@@ -335,13 +335,53 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
         Calendar calendar = Calendar.getInstance();
         StringBuilder matchDate = new StringBuilder();
-        matchDate.append(calendar.get(Calendar.MONTH)).append("/")
-                .append(calendar.get(Calendar.DATE)).append("/")
-                .append(calendar.get(Calendar.YEAR)).append(" @ ")
-                .append(calendar.get(Calendar.HOUR_OF_DAY)).append(":")
-                .append(calendar.get(Calendar.MINUTE));
+        matchDate
+                .append(calendar.get(Calendar.YEAR)).append("/")
+                .append(calendar.get(Calendar.MONTH) + 1).append("/")
+                .append(calendar.get(Calendar.DATE)).append(" @ ")
+                .append(convert24To12(calendar.get(Calendar.HOUR_OF_DAY))).append(":")
+                .append(getDisplayMinute(calendar.get(Calendar.MINUTE)));
+
         matchRecord.setMatchDate(matchDate.toString());
         MatchRecordManager.recordMatchScore(getActivity(), matchRecord);
+    }
+
+    private String getMonth(int month) {
+        switch (month) {
+            case 1:
+                return "January";
+            case 2:
+                return "February";
+            case 3:
+                return "March";
+            case 4:
+                return "April";
+            case 5:
+                return "May";
+            case 6:
+                return "June";
+            case 7:
+                return "July";
+            case 8:
+                return "August";
+            case 9:
+                return "September";
+            case 10:
+                return "October";
+            case 11:
+                return "November";
+            case 12:
+                return "December";
+        }
+        return "undefined";
+    }
+
+    private String getDisplayMinute(int minute) {
+        return (minute < 10) ? "0" + minute : String.valueOf(minute);
+    }
+
+    private int convert24To12(int hour) {
+        return ((hour % 12) == 0) ? 12 : (hour % 12);
     }
 
     private boolean isSplitSet() {

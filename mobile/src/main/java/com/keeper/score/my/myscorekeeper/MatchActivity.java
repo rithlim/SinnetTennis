@@ -262,7 +262,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                 getString(R.string.game_set_match_title),
                 winner + getString(R.string.game_set_match_msg),
                 getString(R.string.game_set_match_pos_btn),
-                getString(R.string.game_set_match_save_score_btn),
+                getString(R.string.home_btn),
                 null,
                 Enum.ALERT_TYPE.GAME_SET_MATCH);
     }
@@ -340,6 +340,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                                 mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "Full Set", true);
                                 break;
                             case GAME_SET_MATCH:
+                                recordMatchScore();
                                 resetGameScores();
                                 resetSetScores();
                                 updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
@@ -371,10 +372,11 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                                 break;
                             case GAME_SET_MATCH:
                                 recordMatchScore();
-                                resetGameScores();
-                                resetSetScores();
-                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
-                                firstSetActive();
+                                finish();
+//                                resetGameScores();
+//                                resetSetScores();
+//                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
+//                                firstSetActive();
                                 break;
 
                         }
