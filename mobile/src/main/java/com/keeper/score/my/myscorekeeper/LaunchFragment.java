@@ -1,7 +1,6 @@
 package com.keeper.score.my.myscorekeeper;
 
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.os.Handler;
@@ -11,10 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +24,7 @@ import com.keeper.score.common.Enum;
 public class LaunchFragment extends Fragment {
     private static final String TAG = LaunchFragment.class.getSimpleName();
     private static TextView tvPlayButton;
-    private static TextView tvStatsButton;
+    private static TextView tvRecordsButton;
     private static ImageView ivSinnetLogo;
 
     public LaunchFragment() {
@@ -42,7 +38,7 @@ public class LaunchFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_launch, container, false);
         tvPlayButton = (TextView) view.findViewById(R.id.launch_play_button);
-        tvStatsButton = (TextView) view.findViewById(R.id.statistics_button);
+        tvRecordsButton = (TextView) view.findViewById(R.id.records_button);
         ivSinnetLogo = (ImageView) view.findViewById(R.id.launch_sinnet_logo);
         setupListeners();
         return view;
@@ -61,26 +57,25 @@ public class LaunchFragment extends Fragment {
                         tvPlayButton.setTextSize(20f);
                         ivSinnetLogo.clearAnimation();
                         play();
-//                        rotateImage();
-//                        delay(1);
                         return false;
                 }
                 return false;
             }
         });
 
-        tvStatsButton.setOnTouchListener(new View.OnTouchListener() {
+        tvRecordsButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = MotionEventCompat.getActionMasked(event);
                 switch (action) {
                     case (MotionEvent.ACTION_DOWN):
                         Log.d(TAG, "ACTION_DOWN");
-                        tvStatsButton.setTextSize(25f);
+                        tvRecordsButton.setTextSize(25f);
                         return false;
                     case (MotionEvent.ACTION_UP):
                         Log.d(TAG, "ACTION_UP");
-                        tvStatsButton.setTextSize(20f);
+                        tvRecordsButton.setTextSize(20f);
+                        getRecords();
                         return false;
                 }
                 return false;
@@ -90,6 +85,10 @@ public class LaunchFragment extends Fragment {
 
     private void play() {
         ((ILaunch)getActivity()).performAction(Enum.LAUNCH_BUTTON.PLAY);
+    }
+
+    private void getRecords() {
+        ((ILaunch)getActivity()).performAction(Enum.LAUNCH_BUTTON.MATCH_RECORD_LIST);
     }
 
     @Override

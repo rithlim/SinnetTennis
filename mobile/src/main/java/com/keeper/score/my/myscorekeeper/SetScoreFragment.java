@@ -16,6 +16,10 @@ import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IPlayers;
 import com.keeper.score.common.IScore;
 import com.keeper.score.common.ISetScore;
+import com.keeper.score.models.MatchRecord;
+import com.keeper.score.utils.MatchRecordManager;
+
+import java.util.Calendar;
 
 
 public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
@@ -314,6 +318,30 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
             MatchActivity.updateAlertId(R.drawable.ic_trophy);
             endGameSetMatch(getMatchWinner());
         }
+    }
+
+    @Override
+    public void recordMatchScore() {
+        MatchRecord matchRecord = new MatchRecord();
+        matchRecord.setHomePlayerName(getPlayersName(HomeGameFragment.class.getSimpleName()));
+        matchRecord.setHomePlayerFirstSetScore(tvHomePlayerFirstSetScore.getText().toString());
+        matchRecord.setHomePlayerSecondSetScore(tvHomePlayerSecondSetScore.getText().toString());
+        matchRecord.setHomePlayerThirdSetScore(tvHomePlayerThirdSetScore.getText().toString());
+
+        matchRecord.setAwayPlayerName(getPlayersName(AwayGameFragment.class.getSimpleName()));
+        matchRecord.setAwayPlayerFirstSetScore(tvAwayPlayerFirstSetScore.getText().toString());
+        matchRecord.setAwayPlayerSecondSetScore(tvAwayPlayerSecondSetScore.getText().toString());
+        matchRecord.setAwayPlayerThirdSetScore(tvAwayPlayerThirdSetScore.getText().toString());
+
+        Calendar calendar = Calendar.getInstance();
+        StringBuilder matchDate = new StringBuilder();
+        matchDate.append(calendar.get(Calendar.MONTH)).append("/")
+                .append(calendar.get(Calendar.DATE)).append("/")
+                .append(calendar.get(Calendar.YEAR)).append(" @ ")
+                .append(calendar.get(Calendar.HOUR_OF_DAY)).append(":")
+                .append(calendar.get(Calendar.MINUTE));
+        matchRecord.setMatchDate(matchDate.toString());
+        MatchRecordManager.recordMatchScore(getActivity(), matchRecord);
     }
 
     private boolean isSplitSet() {

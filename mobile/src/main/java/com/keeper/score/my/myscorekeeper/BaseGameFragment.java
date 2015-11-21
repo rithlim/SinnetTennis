@@ -22,7 +22,7 @@ import com.keeper.score.common.IScore;
 import com.keeper.score.common.IGameScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
-import com.keeper.score.common.SinnetPreferences;
+import com.keeper.score.utils.SinnetPreferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -487,7 +487,6 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     public void setPlayersName(String tag, String name) {
         if (tag.equalsIgnoreCase(TAG)) {
             mTvPlayerName.setText(name);
-
             SinnetPreferences.putPreferences(this.getActivity(), tag, name);
         }
     }

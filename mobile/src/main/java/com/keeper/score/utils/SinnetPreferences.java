@@ -1,4 +1,4 @@
-package com.keeper.score.common;
+package com.keeper.score.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,11 +1,12 @@
 package com.keeper.score.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Rith on 11/18/2015.
  */
-public class MatchRecord {
+public class MatchRecord implements Serializable{
 
     private String matchDate;
     private String homePlayerName;

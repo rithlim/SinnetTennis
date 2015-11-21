@@ -5,12 +5,7 @@ import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +18,8 @@ import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
-import com.keeper.score.common.SinnetPreferences;
 import com.keeper.score.utils.FragmentUtils;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Date;
+import com.keeper.score.utils.SinnetPreferences;
 
 public class MatchActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, DialogInterface.OnDismissListener {
     private static final String TAG = MatchActivity.class.getSimpleName();
@@ -92,15 +83,14 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         Enum.GAME_SCORE awayGameScore = mAwayGameCallback.getGameScore();
         boolean loveGame = (homeGameScore.equals(Enum.GAME_SCORE.LOVE) && awayGameScore.equals(Enum.GAME_SCORE.LOVE));
 
-        if(didFinishTutorial && (!loveGame || !SetScoreFragment.mIsNewMatch)) {
+        if (didFinishTutorial && (!loveGame || !SetScoreFragment.mIsNewMatch)) {
             showAlert("End Match?",
                     "All scores will be lost. Are you sure you want to end the match?",
                     "Yes",
                     "No",
                     null,
                     Enum.ALERT_TYPE.END_MATCH);
-        }
-        else {
+        } else {
             finish();
         }
     }
@@ -272,7 +262,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                 getString(R.string.game_set_match_title),
                 winner + getString(R.string.game_set_match_msg),
                 getString(R.string.game_set_match_pos_btn),
-                getString(R.string.game_set_match_track_score_btn),
+                getString(R.string.game_set_match_save_score_btn),
                 null,
                 Enum.ALERT_TYPE.GAME_SET_MATCH);
     }
@@ -380,7 +370,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                                 mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "10-Point TB", true);
                                 break;
                             case GAME_SET_MATCH:
-                                takeScreenshot();
+                                recordMatchScore();
                                 resetGameScores();
                                 resetSetScores();
                                 updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
@@ -435,47 +425,52 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         alertIconId = alertId;
     }
 
-    private void takeScreenshot() {
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-
-        try {
-            // image naming and path  to include sd card  appending name you choose for file
-            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
-
-            // create bitmap screen capture
-            View v1 = getWindow().getDecorView().getRootView();
-            v1.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-            v1.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(mPath);
-
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-
-            openScreenshot(imageFile);
-        } catch (Throwable e) {
-            // Several error may come out with file handling or OOM
-            e.printStackTrace();
-        }
+    @Override
+    public void recordMatchScore() {
+        mSetScoreCallback.recordMatchScore();
     }
 
-    private void openScreenshot(File imageFile) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        Uri uri = Uri.fromFile(imageFile);
-        intent.setDataAndType(uri, "image/*");
-        ActivityInfo activityInfo = intent.resolveActivityInfo(getPackageManager(), intent.getFlags());
-        if (activityInfo.exported) {
-            startActivity(intent);
-        } else {
-
-        }
-    }
+//    private void takeScreenshot() {
+//        Date now = new Date();
+//        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+//
+//        try {
+//            // image naming and path  to include sd card  appending name you choose for file
+//            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+//
+//            // create bitmap screen capture
+//            View v1 = getWindow().getDecorView().getRootView();
+//            v1.setDrawingCacheEnabled(true);
+//            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
+//            v1.setDrawingCacheEnabled(false);
+//
+//            File imageFile = new File(mPath);
+//
+//            FileOutputStream outputStream = new FileOutputStream(imageFile);
+//            int quality = 100;
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+//            outputStream.flush();
+//            outputStream.close();
+//
+//            openScreenshot(imageFile);
+//        } catch (Throwable e) {
+//            // Several error may come out with file handling or OOM
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void openScreenshot(File imageFile) {
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_VIEW);
+//        Uri uri = Uri.fromFile(imageFile);
+//        intent.setDataAndType(uri, "image/*");
+//        ActivityInfo activityInfo = intent.resolveActivityInfo(getPackageManager(), intent.getFlags());
+//        if (activityInfo.exported) {
+//            startActivity(intent);
+//        } else {
+//
+//        }
+//    }
 
     @Override
     public void endTutorial() {

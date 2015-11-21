@@ -13,4 +13,5 @@ public interface ISetScore extends IPlayers{
     void firstSetActive();
     void secondSetActive();
     void thirdSetActive();
+    void recordMatchScore();
 }

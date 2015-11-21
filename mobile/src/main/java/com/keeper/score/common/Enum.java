@@ -56,6 +56,6 @@ public class Enum {
 
     public enum LAUNCH_BUTTON {
         PLAY,
-        STATISTICS
+        MATCH_RECORD_LIST
     }
 }
