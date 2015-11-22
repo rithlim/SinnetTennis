@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.sinnet;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

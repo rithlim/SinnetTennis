@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.MatchGame;
+package com.keeper.score.my.sinnet.MatchGame;
 
 
 import android.app.Fragment;
@@ -22,7 +22,7 @@ import com.keeper.score.common.IScore;
 import com.keeper.score.common.IGameScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 import com.keeper.score.utils.SinnetPreferences;
 
 /**

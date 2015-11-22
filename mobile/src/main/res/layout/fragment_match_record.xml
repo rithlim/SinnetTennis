@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.keeper.score.my.myscorekeeper.Records.MatchRecordListFragment">
+    tools:context="com.keeper.score.my.sinnet.Records.MatchRecordListFragment">
 
     <ListView
         android:id="@+id/match_record_list"

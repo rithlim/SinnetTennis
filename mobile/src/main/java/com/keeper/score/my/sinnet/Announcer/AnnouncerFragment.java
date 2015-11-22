@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.Announcer;
+package com.keeper.score.my.sinnet.Announcer;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.keeper.score.common.IAnnouncements;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 
 public class AnnouncerFragment extends Fragment implements IAnnouncements {
     // TODO: Rename parameter arguments, choose names that match

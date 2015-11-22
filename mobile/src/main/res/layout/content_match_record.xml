@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.keeper.score.my.myscorekeeper.Records.MatchRecordListActivity"
+    tools:context="com.keeper.score.my.sinnet.Records.MatchRecordListActivity"
     tools:showIn="@layout/activity_match_record">
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ package com.keeper.score.common;
  */
 public interface ISetScore extends IPlayers{
     void resetSetScores();
+    void setFinalSetTBSetScore(int homeTBScore, int awayTBScore);
     void updateSetScores(String tag);
     void enableTieBreakerMode(boolean mode);
     boolean isTieBreakerModeEnabled();

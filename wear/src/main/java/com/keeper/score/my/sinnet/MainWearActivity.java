@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.sinnet;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;

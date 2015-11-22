@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.keeper.score.my.myscorekeeper.Announcer"
+    tools:context="com.keeper.score.my.sinnet.Announcer"
     tools:showIn="@layout/activity_announcer">
 
 </RelativeLayout>

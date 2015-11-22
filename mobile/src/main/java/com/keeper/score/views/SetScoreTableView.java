@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.keeper.score.common.IPlayers;
-import com.keeper.score.my.myscorekeeper.MatchGame.HomeGameFragment;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.MatchGame.HomeGameFragment;
+import com.keeper.score.my.sinnet.R;
 
 /**
  * Created by Rith on 11/1/2015.

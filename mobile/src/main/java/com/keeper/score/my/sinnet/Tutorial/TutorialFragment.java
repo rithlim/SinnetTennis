@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.Tutorial;
+package com.keeper.score.my.sinnet.Tutorial;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -16,9 +16,9 @@ import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
-import com.keeper.score.my.myscorekeeper.MatchGame.AwayGameFragment;
-import com.keeper.score.my.myscorekeeper.MatchGame.HomeGameFragment;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.MatchGame.AwayGameFragment;
+import com.keeper.score.my.sinnet.MatchGame.HomeGameFragment;
+import com.keeper.score.my.sinnet.R;
 
 public class TutorialFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

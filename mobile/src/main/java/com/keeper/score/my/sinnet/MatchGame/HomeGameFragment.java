@@ -1,14 +1,15 @@
-package com.keeper.score.my.myscorekeeper.MatchGame;
+package com.keeper.score.my.sinnet.MatchGame;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 
-public class AwayGameFragment extends BaseGameFragment {
+public class HomeGameFragment extends BaseGameFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -27,8 +28,8 @@ public class AwayGameFragment extends BaseGameFragment {
      * @return A new instance of fragment HomeScoreFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AwayGameFragment newInstance(String param1, String param2) {
-        AwayGameFragment fragment = new AwayGameFragment();
+    public static HomeGameFragment newInstance(String param1, String param2) {
+        HomeGameFragment fragment = new HomeGameFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -36,7 +37,7 @@ public class AwayGameFragment extends BaseGameFragment {
         return fragment;
     }
 
-    public AwayGameFragment() {
+    public HomeGameFragment() {
         // Required empty public constructor
     }
 
@@ -58,14 +59,15 @@ public class AwayGameFragment extends BaseGameFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_away_game, container, false);
-        setView(view, R.id.away_score, R.id.awayPlayer, R.id.awayPlayerEditText, R.id.away_server_receiver, false, R.id.server_icon);
+        View view = inflater.inflate(R.layout.fragment_home_game, container, false);
+        setView(view, R.id.home_score, R.id.homePlayer, R.id.homePlayerEditText, R.id.home_server_receiver, true, R.id.server_icon);
         return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Activity activity = getActivity();
     }
 
     @Override

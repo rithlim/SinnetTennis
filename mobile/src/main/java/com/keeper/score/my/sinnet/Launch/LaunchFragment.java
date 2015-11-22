@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.Launch;
+package com.keeper.score.my.sinnet.Launch;
 
 
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.keeper.score.common.*;
 import com.keeper.score.common.Enum;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 
 
 /**
@@ -26,7 +26,6 @@ public class LaunchFragment extends Fragment {
     private static final String TAG = LaunchFragment.class.getSimpleName();
     private static TextView tvPlayButton;
     private static TextView tvRecordsButton;
-    private static ImageView ivSinnetLogo;
 
     public LaunchFragment() {
         // Required empty public constructor
@@ -40,7 +39,6 @@ public class LaunchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_launch, container, false);
         tvPlayButton = (TextView) view.findViewById(R.id.launch_play_button);
         tvRecordsButton = (TextView) view.findViewById(R.id.records_button);
-        ivSinnetLogo = (ImageView) view.findViewById(R.id.launch_sinnet_logo);
         setupListeners();
         return view;
     }
@@ -56,7 +54,6 @@ public class LaunchFragment extends Fragment {
                         return false;
                     case (MotionEvent.ACTION_UP):
                         tvPlayButton.setTextSize(20f);
-                        ivSinnetLogo.clearAnimation();
                         play();
                         return false;
                 }
@@ -95,7 +92,6 @@ public class LaunchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ivSinnetLogo.clearAnimation();
     }
 
     private void delay(int durationInSeconds) {
@@ -115,7 +111,6 @@ public class LaunchFragment extends Fragment {
 //        anim.setDuration(1000);
 
 // Start animating the image
-        ivSinnetLogo.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.rotate_image));
 
 // Later.. stop the animation
         //ivSinnetLogo.setAnimation(null);

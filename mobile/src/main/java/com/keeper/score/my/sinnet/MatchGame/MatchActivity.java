@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.Records;
+package com.keeper.score.my.sinnet.MatchGame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,12 +18,9 @@ import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
-import com.keeper.score.my.myscorekeeper.Announcer.AnnouncerFragment;
-import com.keeper.score.my.myscorekeeper.MatchGame.AwayGameFragment;
-import com.keeper.score.my.myscorekeeper.MatchGame.HomeGameFragment;
-import com.keeper.score.my.myscorekeeper.R;
-import com.keeper.score.my.myscorekeeper.MatchGame.SetScoreFragment;
-import com.keeper.score.my.myscorekeeper.Tutorial.TutorialFragment;
+import com.keeper.score.my.sinnet.Announcer.AnnouncerFragment;
+import com.keeper.score.my.sinnet.R;
+import com.keeper.score.my.sinnet.Tutorial.TutorialFragment;
 import com.keeper.score.utils.FragmentUtils;
 import com.keeper.score.utils.SinnetPreferences;
 
@@ -148,6 +145,11 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     }
 
     @Override
+    public void setFinalSetTBSetScore(int homeTBScore, int awayTBScore) {
+        mSetScoreCallback.setFinalSetTBSetScore(homeTBScore, awayTBScore);
+    }
+
+    @Override
     public Enum.GAME_SCORE getGameScore() {
         return Enum.GAME_SCORE.LOVE;
     }
@@ -263,6 +265,11 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void endGameSetMatch(String winner) {
+        if(mHomeGameCallback.getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)) {
+            int homeTBScore = mHomeGameCallback.getOpponentTBScore(HomeGameFragment.class.getSimpleName());
+            int awayTBScore = mAwayGameCallback.getOpponentTBScore(AwayGameFragment.class.getSimpleName());
+            setFinalSetTBSetScore(homeTBScore, awayTBScore);
+        }
         setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
         showAlert(
                 getString(R.string.game_set_match_title),

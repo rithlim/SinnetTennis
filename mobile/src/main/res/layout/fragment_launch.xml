@@ -5,7 +5,7 @@
     android:background="@color/launch_background"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="com.keeper.score.my.myscorekeeper.Launch.LaunchFragment">
+    tools:context="com.keeper.score.my.sinnet.Launch.LaunchFragment">
 
     <TextView
         android:id="@+id/launch_header"
@@ -53,16 +53,6 @@
         android:text="@string/launch_new_match"
         android:textColor="@color/white"
         android:textSize="@dimen/launch_button_normal" />
-
-    <ImageView
-        android:id="@+id/launch_sinnet_logo"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_below="@+id/launch_sub_header"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/sinnet"
-        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/records_button"

@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.MatchGame;
+package com.keeper.score.my.sinnet.MatchGame;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,8 +17,7 @@ import com.keeper.score.common.IPlayers;
 import com.keeper.score.common.IScore;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.models.MatchRecord;
-import com.keeper.score.my.myscorekeeper.Records.MatchActivity;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 import com.keeper.score.utils.MatchRecordManager;
 
 import java.util.Calendar;
@@ -220,6 +219,12 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         }
     }
 
+    @Override
+    public void setFinalSetTBSetScore(int homeTBScore, int awayTBScore) {
+        setSetScore(tvHomePlayerThirdSetScore, homeTBScore);
+        setSetScore(tvAwayPlayerThirdSetScore, awayTBScore);
+    }
+
     private void setSetScore(TextView textView, int setScore) {
         textView.setText(String.valueOf(setScore));
     }
@@ -348,7 +353,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         matchRecord.setMatchDate(matchDate.toString());
 
         //Begin Time
-        if(beginMatchDate != null) {
+        if (beginMatchDate != null) {
             StringBuilder matchBeginTime = new StringBuilder();
             matchBeginTime.append("Start: ")
                     .append(convert24To12(beginMatchDate.get(Calendar.HOUR_OF_DAY))).append(":")
@@ -366,7 +371,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         matchEndTime.append("End: ")
                 .append(convert24To12(endMatchDate.get(Calendar.HOUR_OF_DAY))).append(":")
                 .append(getDisplayMinute(endMatchDate.get(Calendar.MINUTE)));
-        if(isMatchInAM(endMatchDate.get(Calendar.HOUR_OF_DAY))) {
+        if (isMatchInAM(endMatchDate.get(Calendar.HOUR_OF_DAY))) {
             matchEndTime.append(" AM");
         } else {
             matchEndTime.append(" PM");
@@ -415,7 +420,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     }
 
     private boolean isMatchInAM(int hour) {
-        return ((hour % 12) == 0) ? true : false;
+        return ((hour < 12) ? true : false);
     }
 
     private boolean isSplitSet() {

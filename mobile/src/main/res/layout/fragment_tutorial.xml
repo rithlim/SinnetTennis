@@ -6,7 +6,7 @@
     android:alpha="0.7"
     android:background="@android:color/transparent"
     android:clickable="true"
-    tools:context="com.keeper.score.my.myscorekeeper.Tutorial.TutorialFragment">
+    tools:context="com.keeper.score.my.sinnet.Tutorial.TutorialFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

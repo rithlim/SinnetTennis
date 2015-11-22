@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper.Records;
+package com.keeper.score.my.sinnet.Records;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.keeper.score.models.MatchRecord;
-import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.sinnet.R;
 
 import java.util.Collections;
 import java.util.List;
