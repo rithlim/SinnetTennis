@@ -23,8 +23,8 @@
     <string name="reset_set_title">Set Score</string>
     <string name="reset_set_msg">Reset SET scores?</string>
 
-    <string name="confirm_win_title">&#160;win!</string>
-    <string name="confirm_win_msg">&#160;wins game.</string>
+    <string name="confirm_win_title">Game!</string>
+    <string name="confirm_win_msg">&#160;wins the game.</string>
     <string name="confirm_win_neg_btn">Cancel</string>
     <string name="confirm_win_neutral_btn">Reset Game</string>
 
@@ -49,9 +49,9 @@
     <string name="title_activity_announcer">Announcer</string>
 
     <!-- ANNOUNCEMENT LABEL -->
-    <string name="announcement_set_one">Set 1</string>
-    <string name="announcement_set_two">Set 2</string>
-    <string name="announcement_set_three">Set 3</string>
+    <string name="announcement_set_one">SET 1</string>
+    <string name="announcement_set_two">SET 2</string>
+    <string name="announcement_set_three">SET 3</string>
     <string name="announcement_sub_label">sub label</string>
 
     <!-- TUTORIAL -->

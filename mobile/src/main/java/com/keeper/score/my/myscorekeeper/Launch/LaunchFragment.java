@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Launch;
 
 
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.keeper.score.common.*;
 import com.keeper.score.common.Enum;
+import com.keeper.score.my.myscorekeeper.R;
 
 
 /**

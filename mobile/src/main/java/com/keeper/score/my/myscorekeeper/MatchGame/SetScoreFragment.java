@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.MatchGame;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -17,6 +17,8 @@ import com.keeper.score.common.IPlayers;
 import com.keeper.score.common.IScore;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.models.MatchRecord;
+import com.keeper.score.my.myscorekeeper.Records.MatchActivity;
+import com.keeper.score.my.myscorekeeper.R;
 import com.keeper.score.utils.MatchRecordManager;
 
 import java.util.Calendar;
@@ -43,7 +45,6 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     private static TextView tvAwayPlayerSecondSetScore;
     private static TextView tvAwayPlayerThirdSetScore;
 
-
     private static int mHomePlayerSetOneScore;
     private static int mHomePlayerSetTwoScore;
     private static int mHomePlayerSetThreeScore;
@@ -59,6 +60,8 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     public static boolean mIsNewMatch = true;
 
     private ISetScore setScoreCallback;
+
+    private static Calendar beginMatchDate;
 
     /**
      * Use this factory method to create a new instance of
@@ -190,6 +193,8 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     @Override
     public void resetSetScores() {
+        beginMatchDate = null;
+        beginMatchDate = Calendar.getInstance();
         mIsNewMatch = true;
         mHomePlayerSetOneScore = 0;
         mHomePlayerSetTwoScore = 0;
@@ -333,16 +338,41 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         matchRecord.setAwayPlayerSecondSetScore(tvAwayPlayerSecondSetScore.getText().toString());
         matchRecord.setAwayPlayerThirdSetScore(tvAwayPlayerThirdSetScore.getText().toString());
 
-        Calendar calendar = Calendar.getInstance();
+        Calendar endMatchDate = Calendar.getInstance();
+        //Date
         StringBuilder matchDate = new StringBuilder();
-        matchDate
-                .append(calendar.get(Calendar.YEAR)).append("/")
-                .append(calendar.get(Calendar.MONTH) + 1).append("/")
-                .append(calendar.get(Calendar.DATE)).append(" @ ")
-                .append(convert24To12(calendar.get(Calendar.HOUR_OF_DAY))).append(":")
-                .append(getDisplayMinute(calendar.get(Calendar.MINUTE)));
-
+        matchDate.append("Date: ")
+                .append(endMatchDate.get(Calendar.YEAR)).append("/")
+                .append(endMatchDate.get(Calendar.MONTH) + 1).append("/")
+                .append(endMatchDate.get(Calendar.DATE));
         matchRecord.setMatchDate(matchDate.toString());
+
+        //Begin Time
+        if(beginMatchDate != null) {
+            StringBuilder matchBeginTime = new StringBuilder();
+            matchBeginTime.append("Start: ")
+                    .append(convert24To12(beginMatchDate.get(Calendar.HOUR_OF_DAY))).append(":")
+                    .append(getDisplayMinute(beginMatchDate.get(Calendar.MINUTE)));
+            if (isMatchInAM(beginMatchDate.get(Calendar.HOUR_OF_DAY))) {
+                matchBeginTime.append(" AM");
+            } else {
+                matchBeginTime.append(" PM");
+            }
+            matchRecord.setMatchBeginTime(matchBeginTime.toString());
+        }
+
+        //End Time
+        StringBuilder matchEndTime = new StringBuilder();
+        matchEndTime.append("End: ")
+                .append(convert24To12(endMatchDate.get(Calendar.HOUR_OF_DAY))).append(":")
+                .append(getDisplayMinute(endMatchDate.get(Calendar.MINUTE)));
+        if(isMatchInAM(endMatchDate.get(Calendar.HOUR_OF_DAY))) {
+            matchEndTime.append(" AM");
+        } else {
+            matchEndTime.append(" PM");
+        }
+        matchRecord.setMatchEndTime(matchEndTime.toString());
+
         MatchRecordManager.recordMatchScore(getActivity(), matchRecord);
     }
 
@@ -382,6 +412,10 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
 
     private int convert24To12(int hour) {
         return ((hour % 12) == 0) ? 12 : (hour % 12);
+    }
+
+    private boolean isMatchInAM(int hour) {
+        return ((hour % 12) == 0) ? true : false;
     }
 
     private boolean isSplitSet() {

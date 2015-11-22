@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
     <FrameLayout
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/set_score_background_color"></FrameLayout>
+        android:background="@drawable/set_score_border"></FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,14 +25,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/home_background_color"></FrameLayout>
+            android:background="@drawable/home_border"></FrameLayout>
 
         <FrameLayout
             android:id="@+id/away_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/away_background_color"></FrameLayout>
+            android:background="@drawable/away_border"></FrameLayout>
     </LinearLayout>
 
 

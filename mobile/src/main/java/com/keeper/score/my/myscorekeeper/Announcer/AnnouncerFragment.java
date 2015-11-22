@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Announcer;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
-import android.view.animation.TranslateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.keeper.score.common.IAnnouncements;
+import com.keeper.score.my.myscorekeeper.R;
 
 public class AnnouncerFragment extends Fragment implements IAnnouncements {
     // TODO: Rename parameter arguments, choose names that match
@@ -96,7 +96,7 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
         if (tvAnnouncementLabel != null && subLabel != null) {
             tvAnnouncementLabel.setText(label);
             tvAnnouncementSubLabel.setText(subLabel);
-            tvAnnouncementSubLabel.setVisibility((showSubLabel) ? View.VISIBLE : View.INVISIBLE);
+            tvAnnouncementSubLabel.setVisibility((showSubLabel) ? View.VISIBLE : View.GONE);
             bounceAnimation();
         }
     }
@@ -109,14 +109,17 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
 
     private void bounceAnimation() {
         tvAnnouncementLabel.clearAnimation();
-        //tvAnnouncementLabel.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.bounce));
-        TranslateAnimation translation;
-        translation = new TranslateAnimation(0f, 0F, getDisplayHeight() / 2, 50);
-        translation.setStartOffset(500);
-        translation.setDuration(2000);
-        translation.setFillAfter(true);
-        translation.setInterpolator(new BounceInterpolator());
-        tvAnnouncementLabel.startAnimation(translation);
-        tvAnnouncementSubLabel.startAnimation(translation);
+        tvAnnouncementLabel.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat));
+        tvAnnouncementSubLabel.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat));
+//        TranslateAnimation translation;
+//        final float scale = getActivity().getResources().getDisplayMetrics().density;
+//        int pixels = (int) (50 * scale + 0.5f);
+//        translation = new TranslateAnimation(0f, 0F, getDisplayHeight() / 2, pixels);
+//        translation.setStartOffset(500);
+//        translation.setDuration(2000);
+//        translation.setFillAfter(true);
+//        translation.setInterpolator(new BounceInterpolator());
+//        tvAnnouncementLabel.startAnimation(translation);
+//        tvAnnouncementSubLabel.startAnimation(translation);
     }
 }

@@ -8,13 +8,14 @@
     <color name="black">#000</color>
     <color name="server_receiver_label_color">#00002A</color>
     <color name="player_name_label_color">#00002A</color>
-    <color name="home_game_score_label_color">#00008B</color>
+    <color name="home_game_score_label_color">#007fff</color>
     <color name="home_game_score_label_shadow_color">#FFFFFF</color>
-    <color name="away_game_score_label_color">#004417</color>
+    <color name="away_game_score_label_color">#009900</color>
     <color name="away_game_score_label_shadow_color">#FFFFFF</color>
     <color name="home_background_color">#FFFFFF</color>
     <color name="away_background_color">#99bbff</color>
-    <color name="set_score_background_color">#E0E0EB</color>
+    <color name="set_score_background_color">#e0ebeb</color>
+    <color name="set_set_label_color">#ff8000</color>
 
     <color name="seafoam">#ffc6f9e5</color>
     <color name="chartreuse">#ffb6e9b5</color>
@@ -23,8 +24,12 @@
     <color name="turquoise">#ff86b9b5</color>
     <color name="slate">#ff76a9b5</color>
 
-    <color name="tennis_ball_green">#8484ad</color>
-    <color name="tennis_ball_green_shadow">#000000</color>
+    <!--Announcer-->
+    <color name="announcer_label_color">#ff8000</color>
+    <color name="announcer_label_shadow_color">#000000</color>
 
     <color name="launch_background">#99bbff</color>
+
+    <color name="border_stroke_color">#00008B</color>
+    <color name="border_solid_color">#cce0ff</color>
 </resources>

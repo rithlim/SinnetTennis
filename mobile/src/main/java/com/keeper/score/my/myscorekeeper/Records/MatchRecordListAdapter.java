@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Records;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.keeper.score.models.MatchRecord;
+import com.keeper.score.my.myscorekeeper.R;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ public class MatchRecordListAdapter extends ArrayAdapter<MatchRecord> {
     public MatchRecordListAdapter(Context context, List<MatchRecord> matchRecordList) {
         super(context, R.layout.match_record_layout, matchRecordList);
         this.matchRecordList = matchRecordList;
+        Collections.reverse(this.matchRecordList);
     }
 
     @Override
@@ -45,6 +48,8 @@ public class MatchRecordListAdapter extends ArrayAdapter<MatchRecord> {
             viewHolderItem.awayThirdSetScore = (TextView) convertView.findViewById(R.id.record_away_third_set_score);
 
             viewHolderItem.matchDate = (TextView) convertView.findViewById(R.id.record_match_date);
+            viewHolderItem.matchBeginTime = (TextView) convertView.findViewById(R.id.record_match_begin_time);
+            viewHolderItem.matchEndTime = (TextView) convertView.findViewById(R.id.record_match_end_time);
 
             //Set tag so it can be referenced later
             convertView.setTag(viewHolderItem);
@@ -63,6 +68,8 @@ public class MatchRecordListAdapter extends ArrayAdapter<MatchRecord> {
         viewHolderItem.awayThirdSetScore.setText(matchRecordList.get(position).getAwayPlayerThirdSetScore());
 
         viewHolderItem.matchDate.setText(matchRecordList.get(position).getMatchDate());
+        viewHolderItem.matchBeginTime.setText(matchRecordList.get(position).getMatchBeginTime());
+        viewHolderItem.matchEndTime.setText(matchRecordList.get(position).getMatchEndTime());
 
         return convertView;
     }
@@ -77,5 +84,7 @@ public class MatchRecordListAdapter extends ArrayAdapter<MatchRecord> {
         TextView awaySecondSetScore;
         TextView awayThirdSetScore;
         TextView matchDate;
+        TextView matchBeginTime;
+        TextView matchEndTime;
     }
 }

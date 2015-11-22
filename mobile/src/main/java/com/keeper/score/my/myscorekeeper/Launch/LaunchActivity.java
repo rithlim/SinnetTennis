@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Launch;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.keeper.score.common.ILaunch;
+import com.keeper.score.my.myscorekeeper.Records.MatchActivity;
+import com.keeper.score.my.myscorekeeper.Records.MatchRecordListActivity;
+import com.keeper.score.my.myscorekeeper.R;
 import com.keeper.score.utils.FragmentUtils;
 import com.keeper.score.utils.MatchRecordManager;
 

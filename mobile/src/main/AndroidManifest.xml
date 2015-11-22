@@ -19,12 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar" >
         <activity
-            android:name=".MatchActivity"
+            android:name=".Records.MatchActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".LaunchActivity"
+            android:name=".Launch.LaunchActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MatchRecordListActivity"
+            android:name=".Records.MatchRecordListActivity"
             android:label="@string/title_activity_match_record"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

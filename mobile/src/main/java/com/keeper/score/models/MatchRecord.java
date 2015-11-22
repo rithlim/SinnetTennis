@@ -9,6 +9,8 @@ import java.util.Date;
 public class MatchRecord implements Serializable{
 
     private String matchDate;
+    private String matchBeginTime;
+    private String matchEndTime;
     private String homePlayerName;
     private String awayPlayerName;
     private String homePlayerFirstSetScore;
@@ -88,5 +90,21 @@ public class MatchRecord implements Serializable{
 
     public void setAwayPlayerThirdSetScore(String awayPlayerThirdSetScore) {
         this.awayPlayerThirdSetScore = awayPlayerThirdSetScore;
+    }
+
+    public String getMatchBeginTime() {
+        return matchBeginTime;
+    }
+
+    public void setMatchBeginTime(String matchBeginTime) {
+        this.matchBeginTime = matchBeginTime;
+    }
+
+    public String getMatchEndTime() {
+        return matchEndTime;
+    }
+
+    public void setMatchEndTime(String matchEndTime) {
+        this.matchEndTime = matchEndTime;
     }
 }

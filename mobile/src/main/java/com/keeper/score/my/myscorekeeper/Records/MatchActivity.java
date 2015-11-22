@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Records;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,6 +18,12 @@ import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
+import com.keeper.score.my.myscorekeeper.Announcer.AnnouncerFragment;
+import com.keeper.score.my.myscorekeeper.MatchGame.AwayGameFragment;
+import com.keeper.score.my.myscorekeeper.MatchGame.HomeGameFragment;
+import com.keeper.score.my.myscorekeeper.R;
+import com.keeper.score.my.myscorekeeper.MatchGame.SetScoreFragment;
+import com.keeper.score.my.myscorekeeper.Tutorial.TutorialFragment;
 import com.keeper.score.utils.FragmentUtils;
 import com.keeper.score.utils.SinnetPreferences;
 
@@ -225,7 +231,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         String winner = getPlayersName(tag);
 
         showAlert(
-                winner + getString(R.string.confirm_win_title),
+                getString(R.string.confirm_win_title),
                 winner + getString(R.string.confirm_win_msg),
                 getString(R.string.positive_btn_text),
                 getString(R.string.confirm_win_neg_btn),

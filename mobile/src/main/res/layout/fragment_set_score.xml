@@ -1,17 +1,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context="com.keeper.score.my.myscorekeeper.SetScoreFragment">
+    tools:context="com.keeper.score.my.myscorekeeper.MatchGame.SetScoreFragment">
 
     <RelativeLayout
         android:id="@+id/home_player_set_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/set_score_background_color"
+        android:layout_height="match_parent"
+        android:background="@drawable/set_score_border"
         android:gravity="center">
 
         <!-- Third Set Box -->
@@ -30,12 +29,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="6"
                 android:text="Set 3"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/set_set_label_color"
                 android:textStyle="bold" />
 
             <FrameLayout
@@ -55,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -83,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -111,12 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="6"
                 android:text="Set 2"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/set_set_label_color"
                 android:textStyle="bold" />
 
             <FrameLayout
@@ -136,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -164,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -191,12 +182,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="6"
                 android:text="Set 1"
-                android:textColor="@android:color/holo_red_dark"
+                android:textColor="@color/set_set_label_color"
                 android:textStyle="bold" />
 
             <FrameLayout
@@ -216,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -243,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
@@ -268,14 +255,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:maxLines="1"
-                android:shadowColor="@color/gray"
+                android:paddingRight="2dp"
+                android:shadowColor="@color/black"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowRadius="4"
                 android:text="@string/player_one_label"
                 android:textColor="@color/home_game_score_label_color"
                 android:textSize="@dimen/set_frame_player_label_size"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/set_frame_away_player_name"
@@ -283,14 +271,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:maxLines="1"
-                android:shadowColor="@color/gray"
+                android:paddingRight="2dp"
+                android:shadowColor="@color/black"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowRadius="4"
                 android:text="@string/player_two_label"
                 android:textColor="@color/away_game_score_label_color"
                 android:textSize="@dimen/set_frame_player_label_size"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

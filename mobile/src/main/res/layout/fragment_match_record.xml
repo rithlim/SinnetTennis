@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.keeper.score.my.myscorekeeper.MatchRecordListFragment">
+    tools:context="com.keeper.score.my.myscorekeeper.Records.MatchRecordListFragment">
 
     <ListView
         android:id="@+id/match_record_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@color/launch_background"
+        android:dividerHeight="2dp"/>
 
     <TextView
         android:id="@+id/empty_list"

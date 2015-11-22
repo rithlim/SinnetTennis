@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Records;
 
 
 import android.os.Bundle;
@@ -6,12 +6,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.keeper.score.models.MatchRecord;
+import com.keeper.score.my.myscorekeeper.R;
 import com.keeper.score.utils.MatchRecordManager;
 
 

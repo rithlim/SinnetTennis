@@ -4,15 +4,15 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    tools:context="com.keeper.score.my.myscorekeeper.SetScoreFragment">
+    tools:context="com.keeper.score.my.myscorekeeper.MatchGame.SetScoreFragment">
 
     <RelativeLayout
         android:id="@+id/home_player_set_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@color/set_score_background_color"
-        android:gravity="left">
+        android:background="@drawable/set_score_border"
+        android:gravity="center"
+        android:padding="10dp">
 
         <!-- Third Set Box -->
         <LinearLayout
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+
             android:orientation="vertical"
             android:paddingLeft="5dp">
 
@@ -33,20 +34,21 @@
                 android:shadowColor="@color/gray"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowRadius="3"
                 android:text="Set 3"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold" />
+                android:textColor="@color/set_set_label_color"
+                android:textSize="@dimen/record_set_label_size"
+                android:textStyle="normal" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="right">
                 <!-- Home -->
                 <ImageView
                     android:id="@+id/home_third_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2blue72" />
 
@@ -55,14 +57,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="3"
                     android:textColor="@color/home_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
 
 
@@ -73,8 +75,8 @@
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_third_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2green72" />
 
@@ -83,14 +85,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="6"
                     android:textColor="@color/away_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
 
         </LinearLayout>
@@ -114,10 +116,11 @@
                 android:shadowColor="@color/gray"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowRadius="3"
                 android:text="Set 2"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold" />
+                android:textColor="@color/set_set_label_color"
+                android:textSize="@dimen/record_set_label_size"
+                android:textStyle="normal" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -126,8 +129,8 @@
                 <!-- Home -->
                 <ImageView
                     android:id="@+id/home_second_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2blue72" />
 
@@ -136,14 +139,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="6"
                     android:textColor="@color/home_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
 
 
@@ -154,8 +157,8 @@
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_second_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2green72" />
 
@@ -164,14 +167,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="4"
                     android:textColor="@color/away_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
 
         </LinearLayout>
@@ -194,10 +197,11 @@
                 android:shadowColor="@color/gray"
                 android:shadowDx="3"
                 android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowRadius="3"
                 android:text="Set 1"
-                android:textColor="@android:color/holo_red_dark"
-                android:textStyle="bold" />
+                android:textColor="@color/set_set_label_color"
+                android:textSize="@dimen/record_set_label_size"
+                android:textStyle="normal" />
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -206,8 +210,8 @@
                 <!-- Home -->
                 <ImageView
                     android:id="@+id/home_first_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2blue72" />
 
@@ -216,14 +220,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="5"
                     android:textColor="@color/home_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
 
             <FrameLayout
@@ -233,8 +237,8 @@
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_first_set_set_layout"
-                    android:layout_width="@dimen/set_box_height_width_dimen"
-                    android:layout_height="@dimen/set_box_height_width_dimen"
+                    android:layout_width="@dimen/record_set_box_height_width_dimen"
+                    android:layout_height="@dimen/record_set_box_height_width_dimen"
                     android:layout_gravity="center"
                     android:src="@drawable/p2green72" />
 
@@ -243,14 +247,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:shadowColor="@color/gray"
+                    android:shadowColor="@color/black"
                     android:shadowDx="3"
                     android:shadowDy="3"
                     android:shadowRadius="6"
                     android:text="6"
                     android:textColor="@color/away_game_score_label_color"
-                    android:textSize="@dimen/set_score_label_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/record_set_score_label_size"
+                    android:textStyle="normal" />
             </FrameLayout>
         </LinearLayout>
 
@@ -258,57 +262,98 @@
             android:id="@+id/player_name_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_toLeftOf="@id/set_frame_first"
             android:gravity="right"
             android:orientation="vertical"
-            android:paddingRight="15dp">
+            android:paddingRight="15dp"
+            android:paddingTop="15dp">
 
             <TextView
                 android:id="@+id/record_home_player_name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:maxLines="1"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
                 android:text="@string/player_one_label"
                 android:textColor="@color/home_game_score_label_color"
-                android:textSize="@dimen/set_frame_player_label_size"
-                android:textStyle="bold|italic" />
+                android:textSize="@dimen/record_player_name_label_size"
+                android:textStyle="normal" />
 
             <TextView
                 android:id="@+id/record_away_player_name_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:maxLines="1"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="6"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
                 android:text="@string/player_two_label"
                 android:textColor="@color/away_game_score_label_color"
-                android:textSize="@dimen/set_frame_player_label_size"
-                android:textStyle="bold|italic" />
+                android:textSize="@dimen/record_player_name_label_size"
+                android:textStyle="normal" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/player_name_frame"
+            android:gravity="left"
             android:orientation="vertical"
             android:paddingRight="15dp"
-            android:layout_toLeftOf="@id/player_name_frame">
+            android:paddingTop="5dp"
+            android:visibility="visible">
 
             <TextView
                 android:id="@+id/record_match_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingRight="2dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
                 android:text="Date"
-                android:textColor="@color/black"
+                android:textColor="#00008B"
                 android:textSize="12dp"
-                android:textStyle="normal" />
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/record_match_begin_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingRight="2dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="Date"
+                android:textColor="#00008B"
+                android:textSize="12dp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/record_match_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:paddingRight="2dp"
+                android:shadowColor="@color/black"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"
+                android:text="Date"
+                android:textColor="#00008B"
+                android:textSize="12dp"
+                android:textStyle="italic" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

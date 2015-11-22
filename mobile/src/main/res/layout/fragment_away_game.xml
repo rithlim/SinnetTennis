@@ -21,14 +21,11 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingRight="@dimen/player_name_label_padding"
-            android:shadowColor="@color/gray"
-            android:shadowDx="3"
-            android:shadowDy="3"
-            android:shadowRadius="6"
+            android:shadowColor="@color/black"
             android:text="@string/player_two_label"
             android:textColor="@color/away_game_score_label_color"
             android:textSize="@dimen/player_name_label_size"
-            android:textStyle="bold|italic"
+            android:textStyle="bold"
             android:visibility="visible" />
 
         <EditText
@@ -40,7 +37,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:hint="@string/player_name_hint"
-            android:maxLength="15"
+            android:maxLength="10"
             android:singleLine="true"
             android:textSize="@dimen/player_name_edit_text_size"
             android:visibility="gone" />
@@ -59,7 +56,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:shadowColor="@color/gray"
+            android:shadowColor="@color/black"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="2"

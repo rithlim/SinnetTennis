@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.MatchGame;
 
 
 import android.app.Fragment;
@@ -22,6 +22,7 @@ import com.keeper.score.common.IScore;
 import com.keeper.score.common.IGameScoreKeeper;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
+import com.keeper.score.my.myscorekeeper.R;
 import com.keeper.score.utils.SinnetPreferences;
 
 /**
@@ -439,12 +440,12 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
 
     private void animateTextView(String score) {
         mTvGameScore.clearAnimation();
-        if (score.equalsIgnoreCase(getString(R.string.heart_ascii))) {
-            Log.d(TAG, "updateText: " + score);
-            //mTvGameScore.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat));
-        } else {
-            mTvGameScore.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
-        }
+//        if (score.equalsIgnoreCase(getString(R.string.heart_ascii))) {
+//            Log.d(TAG, "updateText: " + score);
+//            //mTvGameScore.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat));
+//        } else {
+//            //mTvGameScore.startAnimation(AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in));
+//        }
     }
 
     @Override

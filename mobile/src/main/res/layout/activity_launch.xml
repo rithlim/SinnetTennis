@@ -6,5 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.keeper.score.my.myscorekeeper.LaunchActivity">
+    tools:context="com.keeper.score.my.myscorekeeper.Launch.LaunchActivity">
 </FrameLayout>

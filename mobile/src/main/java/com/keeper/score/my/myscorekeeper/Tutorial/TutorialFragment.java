@@ -1,4 +1,4 @@
-package com.keeper.score.my.myscorekeeper;
+package com.keeper.score.my.myscorekeeper.Tutorial;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -16,6 +16,9 @@ import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
+import com.keeper.score.my.myscorekeeper.MatchGame.AwayGameFragment;
+import com.keeper.score.my.myscorekeeper.MatchGame.HomeGameFragment;
+import com.keeper.score.my.myscorekeeper.R;
 
 public class TutorialFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -217,6 +220,6 @@ public class TutorialFragment extends Fragment {
     }
 
     private void animateTextView() {
-        instructionLabel.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat));
+        instructionLabel.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.heart_beat_infinite));
     }
 }

@@ -5,7 +5,7 @@
     android:background="@color/launch_background"
     android:clickable="true"
     android:orientation="vertical"
-    tools:context="com.keeper.score.my.myscorekeeper.LaunchFragment">
+    tools:context="com.keeper.score.my.myscorekeeper.Launch.LaunchFragment">
 
     <TextView
         android:id="@+id/launch_header"
