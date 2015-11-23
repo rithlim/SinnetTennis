@@ -1,5 +1,6 @@
 package com.keeper.score.my.sinnet.Launch;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import com.keeper.score.my.sinnet.R;
 import com.keeper.score.utils.FragmentUtils;
 import com.keeper.score.utils.MatchRecordManager;
 
-public class LaunchActivity extends AppCompatActivity implements ILaunch {
+public class LaunchActivity extends Activity implements ILaunch {
     private static final String TAG = LaunchActivity.class.getSimpleName();
 
     @Override

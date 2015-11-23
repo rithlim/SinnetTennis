@@ -1,10 +1,12 @@
 package com.keeper.score.my.sinnet.MatchGame;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +17,7 @@ import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IGameListener;
+import com.keeper.score.common.IMatch;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.common.ITutorial;
@@ -24,7 +27,7 @@ import com.keeper.score.my.sinnet.Tutorial.TutorialFragment;
 import com.keeper.score.utils.FragmentUtils;
 import com.keeper.score.utils.SinnetPreferences;
 
-public class MatchActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, DialogInterface.OnDismissListener {
+public class MatchActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, IMatch, DialogInterface.OnDismissListener {
     private static final String TAG = MatchActivity.class.getSimpleName();
     private static String mCurrentGameWinner;
 
@@ -41,6 +44,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     private static AlertDialog.Builder myDialog;
 
     private static boolean isDeuce = false;
+    public static boolean isNewMatch = false;
     private static int alertIconId;
 
     @Override
@@ -86,7 +90,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         Enum.GAME_SCORE awayGameScore = mAwayGameCallback.getGameScore();
         boolean loveGame = (homeGameScore.equals(Enum.GAME_SCORE.LOVE) && awayGameScore.equals(Enum.GAME_SCORE.LOVE));
 
-        if (didFinishTutorial && (!loveGame || !SetScoreFragment.mIsNewMatch)) {
+        if (didFinishTutorial && (!loveGame || !isNewMatch)) {
             showAlert("End Match?",
                     "All scores will be lost. Are you sure you want to end the match?",
                     "Yes",
@@ -175,6 +179,15 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     }
 
     @Override
+    public Enum.GAME_SCORE getOpponentsGameScore(String iAm) {
+        if (iAm.equals(HomeGameFragment.class.getSimpleName())) {
+            return mAwayGameCallback.getOpponentsGameScore(iAm);
+        } else {
+            return mHomeGameCallback.getOpponentsGameScore(iAm);
+        }
+    }
+
+    @Override
     public int getOpponentTBScore(String tag) {
         if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName()))
             return mAwayGameCallback.getOpponentTBScore(tag);
@@ -194,11 +207,23 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
             setServer(AwayGameFragment.class.getSimpleName());
         else if (mAwayGameCallback.isServer())
             setServer(HomeGameFragment.class.getSimpleName());
+
     }
 
     @Override
     public boolean isServer() {
         return false;
+    }
+
+    @Override
+    public void checkNewMatch() {
+        if(mHomeGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
+                && mAwayGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
+                && SetScoreFragment.isNewMatch) {
+            isNewMatch = true;
+        } else {
+            isNewMatch = false;
+        }
     }
 
     @Override
@@ -265,7 +290,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void endGameSetMatch(String winner) {
-        if(mHomeGameCallback.getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)) {
+        if (mHomeGameCallback.getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)) {
             int homeTBScore = mHomeGameCallback.getOpponentTBScore(HomeGameFragment.class.getSimpleName());
             int awayTBScore = mAwayGameCallback.getOpponentTBScore(AwayGameFragment.class.getSimpleName());
             setFinalSetTBSetScore(homeTBScore, awayTBScore);
@@ -422,7 +447,9 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                 }
             });
         }
-        myDialog.setOnDismissListener(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            myDialog.setOnDismissListener(this);
+        }
         myDialog.show();
     }
 

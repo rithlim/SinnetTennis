@@ -18,9 +18,10 @@
 
     <!-- Set Score -->
     <dimen name="set_box_height_width_dimen">40dp</dimen>
-    <dimen name="set_score_label_size">35dp</dimen>
+    <dimen name="set_score_label_size">30dp</dimen>
     <dimen name="set_box_layout_padding">2dp</dimen>
     <dimen name="set_frame_player_label_size">20dp</dimen>
+    <dimen name="set_frame_padding">3dp</dimen>
 
     <!-- Launch -->
     <dimen name="launch_button_normal">20dp</dimen>

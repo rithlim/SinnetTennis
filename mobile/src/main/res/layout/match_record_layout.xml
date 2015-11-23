@@ -31,10 +31,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
                 android:text="Set 3"
                 android:textColor="@color/set_set_label_color"
                 android:textSize="@dimen/record_set_label_size"
@@ -71,7 +67,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_third_set_set_layout"
@@ -113,10 +110,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
                 android:text="Set 2"
                 android:textColor="@color/set_set_label_color"
                 android:textSize="@dimen/record_set_label_size"
@@ -153,7 +146,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_second_set_set_layout"
@@ -194,10 +188,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:shadowColor="@color/gray"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
                 android:text="Set 1"
                 android:textColor="@color/set_set_label_color"
                 android:textSize="@dimen/record_set_label_size"
@@ -233,7 +223,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_first_set_set_layout"

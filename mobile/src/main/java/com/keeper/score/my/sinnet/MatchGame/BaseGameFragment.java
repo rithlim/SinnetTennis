@@ -14,12 +14,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IGameListener;
-import com.keeper.score.common.IScore;
 import com.keeper.score.common.IGameScoreKeeper;
+import com.keeper.score.common.IMatch;
+import com.keeper.score.common.IScore;
 import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.my.sinnet.R;
@@ -179,7 +181,11 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
             mTvServerReceiver.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mServerListener.setServer(TAG);
+                    if (MatchActivity.isNewMatch) {
+                        toggleServer();
+                    } else {
+                        Toast.makeText(getActivity(), "Match in progress...", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
@@ -268,6 +274,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                 case LOVE:
                     updateGameScore(Enum.GAME_SCORE.FIFTEEN);
                     updateTextView(Enum.GAME_FIFTEEN);
+                    MatchActivity.isNewMatch = false;
                     break;
                 case FIFTEEN:
                     updateGameScore(Enum.GAME_SCORE.THIRTY);
@@ -333,6 +340,9 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                 case FIFTEEN:
                     updateGameScore(Enum.GAME_SCORE.LOVE);
                     updateTextView(Enum.GAME_LOVE);
+                    if (getOpponentsGameScore(TAG).equals(Enum.GAME_SCORE.LOVE)) {
+                        MatchActivity.isNewMatch = true;
+                    }
                     break;
                 case THIRTY:
                     updateGameScore(Enum.GAME_SCORE.FIFTEEN);
@@ -371,6 +381,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
         updateTextView(Enum.GAME_LOVE);
         mTieBreakerScore = 0;
         mTvGameScore.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.game_score_label_normal_size));
+        ((IMatch)getActivity()).checkNewMatch();
     }
 
     @Override
@@ -408,6 +419,11 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
             return mGameListener.isDeuceMode();
         }
         return false;
+    }
+
+    @Override
+    public Enum.GAME_SCORE getOpponentsGameScore(String iAm) {
+        return getGameScore();
     }
 
     @Override
@@ -467,6 +483,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
 
     @Override
     public void toggleServer() {
+        mGameListener.toggleServer();
     }
 
     @Override

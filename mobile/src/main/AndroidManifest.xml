@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.keeper.score.my.sinnet"
     android:versionCode="0"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:maxSdkVersion="21"
@@ -17,16 +17,15 @@
         android:icon="@drawable/sinnet"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar" >
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".MatchGame.MatchActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.keeper.score.my.sinnet.Launch.LaunchActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,8 +35,8 @@
         <activity
             android:name="com.keeper.score.my.sinnet.Records.MatchRecordListActivity"
             android:label="@string/title_activity_match_record"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

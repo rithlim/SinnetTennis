@@ -8,5 +8,6 @@ public interface IGameListener extends IScore, IServer{
     void setDeuceMode(boolean mode);
     void updateDeuceModelView(boolean mode);
     boolean isDeuceMode();
+    Enum.GAME_SCORE getOpponentsGameScore(String iAm);
     int getOpponentTBScore(String tag);
 }

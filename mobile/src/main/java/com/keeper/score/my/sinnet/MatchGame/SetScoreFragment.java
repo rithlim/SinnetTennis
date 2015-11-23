@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.keeper.score.common.Enum;
 import com.keeper.score.common.IAlertDialog;
 import com.keeper.score.common.IAnnouncements;
+import com.keeper.score.common.IMatch;
 import com.keeper.score.common.IPlayers;
 import com.keeper.score.common.IScore;
 import com.keeper.score.common.ISetScore;
@@ -56,7 +57,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     private static Enum.CURRENT_SET mCurrentSet;
 
     private static boolean mTieBreakerMode;
-    public static boolean mIsNewMatch = true;
+    public static boolean isNewMatch = false;
 
     private ISetScore setScoreCallback;
 
@@ -193,8 +194,8 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     @Override
     public void resetSetScores() {
         beginMatchDate = null;
+        isNewMatch = true;
         beginMatchDate = Calendar.getInstance();
-        mIsNewMatch = true;
         mHomePlayerSetOneScore = 0;
         mHomePlayerSetTwoScore = 0;
         mHomePlayerSetThreeScore = 0;
@@ -217,6 +218,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
             setSetScore(tvAwayPlayerSecondSetScore, 0);
             setSetScore(tvAwayPlayerThirdSetScore, 0);
         }
+        ((IMatch)getActivity()).checkNewMatch();
     }
 
     @Override
@@ -233,7 +235,7 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
     public void updateSetScores(String tag) {
         switch (mCurrentSet) {
             case FIRST_SET:
-                mIsNewMatch = false;
+                isNewMatch = false;
                 if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
                     mHomePlayerSetOneScore += 1;
                     setSetScore(tvHomePlayerFirstSetScore, mHomePlayerSetOneScore);

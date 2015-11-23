@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:orientation="vertical"
-            android:paddingLeft="5dp">
+            android:paddingLeft="@dimen/set_frame_padding">
 
             <!-- Set 3 Label -->
             <TextView
@@ -64,7 +64,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_third_set_set_layout"
@@ -97,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/set_frame_third"
             android:orientation="vertical"
-            android:paddingLeft="5dp">
+            android:paddingLeft="@dimen/set_frame_padding">
 
             <!-- Set 3 Label -->
             <TextView
@@ -141,7 +142,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_second_set_set_layout"
@@ -182,6 +184,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
+                android:paddingLeft="@dimen/set_frame_padding"
                 android:text="Set 1"
                 android:textColor="@color/set_set_label_color"
                 android:textStyle="bold" />
@@ -216,7 +219,8 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:paddingTop="@dimen/set_frame_padding">
                 <!-- Away -->
                 <ImageView
                     android:id="@+id/away_first_set_set_layout"
@@ -247,7 +251,7 @@
             android:layout_toLeftOf="@id/set_frame_first"
             android:gravity="right"
             android:orientation="vertical"
-            android:paddingRight="15dp">
+            android:paddingRight="5dp">
 
             <TextView
                 android:id="@+id/set_frame_home_player_name"
