@@ -4,8 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="server_receiver_label_size">15dp</dimen>
-    <dimen name="server_icon_width">80dp</dimen>
-    <dimen name="server_icon_height">80dp</dimen>
+    <dimen name="server_icon_width">60dp</dimen>
+    <dimen name="server_icon_height">@dimen/server_icon_width</dimen>
+    <dimen name="game_score_top_padding">28dp</dimen>
     <dimen name="game_score_label_normal_size">80dp</dimen>
     <dimen name="game_score_label_deuce_size">50dp</dimen>
     <dimen name="player_name_label_size">17dp</dimen>

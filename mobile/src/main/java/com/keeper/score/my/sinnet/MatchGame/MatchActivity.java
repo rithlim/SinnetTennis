@@ -1,10 +1,8 @@
 package com.keeper.score.my.sinnet.MatchGame;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +40,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     ISetScore mSetScoreCallback;
     IAnnouncements mAnnouncementCallback;
     private static AlertDialog.Builder myDialog;
+    private static boolean dialogShowing = false;
 
     private static boolean isDeuce = false;
     public static boolean isNewMatch = false;
@@ -217,7 +216,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void checkNewMatch() {
-        if(mHomeGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
+        if (mHomeGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
                 && mAwayGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
                 && SetScoreFragment.isNewMatch) {
             isNewMatch = true;
@@ -353,104 +352,108 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
      **********/
     @Override
     public void showAlert(String title, String msg, String posBtnText, String negBtnTxt, String neutralBtnText, final Enum.ALERT_TYPE alertType) {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        //alertDialogFragment.show(ft, "dialog");
-
-        myDialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setCancelable(false)
-                .setMessage(msg)
-                .setPositiveButton(posBtnText, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (alertType) {
-                            case CONFIRM_GAME_SCORE:
-                                updateSetScores(mCurrentGameWinner);
-                            case RESET_GAME:
-                                mHomeGameCallback.resetGameScores();
-                                mAwayGameCallback.resetGameScores();
-                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
-                                break;
-                            case RESET_SET:
-                                resetSetScores();
-                                break;
-                            case SCORING_SYSTEM:
-                                setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "Full Set", true);
-                                break;
-                            case GAME_SET_MATCH:
-                                recordMatchScore();
-                                resetGameScores();
-                                resetSetScores();
-                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
-                                firstSetActive();
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
-                                break;
-                            case END_MATCH:
-                                finish();
-                                break;
+        Log.d(TAG, "showAlerts");
+        if (!dialogShowing) {
+            myDialog = new AlertDialog.Builder(this)
+                    .setTitle(title)
+                    .setCancelable(false)
+                    .setMessage(msg)
+                    .setPositiveButton(posBtnText, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialogShowing = false;
+                            switch (alertType) {
+                                case CONFIRM_GAME_SCORE:
+                                    updateSetScores(mCurrentGameWinner);
+                                case RESET_GAME:
+                                    mHomeGameCallback.resetGameScores();
+                                    mAwayGameCallback.resetGameScores();
+                                    updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
+                                    break;
+                                case RESET_SET:
+                                    resetSetScores();
+                                    break;
+                                case SCORING_SYSTEM:
+                                    setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
+                                    mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "Full Set", true);
+                                    break;
+                                case GAME_SET_MATCH:
+                                    recordMatchScore();
+                                    resetGameScores();
+                                    resetSetScores();
+                                    updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
+                                    firstSetActive();
+                                    mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_one), "", false);
+                                    break;
+                                case END_MATCH:
+                                    finish();
+                                    break;
+                            }
                         }
-                    }
-                })
-                .setNegativeButton(negBtnTxt, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (alertType) {
-                            case RESET_GAME:
-                                Log.d(TAG, "RESET_GAME");
-                                break;
-                            case RESET_SET:
-                                Log.d(TAG, "RESET_SET");
-                                break;
-                            case CONFIRM_GAME_SCORE:
-                                dialog.dismiss();
-                                break;
-                            case SCORING_SYSTEM:
-                                Log.d(TAG, "SCORING_SYSTEM");
-                                setScoringSystem(Enum.SCORING_SYSTEM.TEN_POINT_SCORING);
-                                mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "10-Point TB", true);
-                                break;
-                            case GAME_SET_MATCH:
-                                recordMatchScore();
-                                finish();
+                    })
+                    .setNegativeButton(negBtnTxt, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialogShowing = false;
+                            switch (alertType) {
+                                case RESET_GAME:
+                                    Log.d(TAG, "RESET_GAME");
+                                    break;
+                                case RESET_SET:
+                                    Log.d(TAG, "RESET_SET");
+                                    break;
+                                case CONFIRM_GAME_SCORE:
+                                    dialog.dismiss();
+                                    break;
+                                case SCORING_SYSTEM:
+                                    Log.d(TAG, "SCORING_SYSTEM");
+                                    setScoringSystem(Enum.SCORING_SYSTEM.TEN_POINT_SCORING);
+                                    mAnnouncementCallback.setAnnouncements(getString(R.string.announcement_set_three), "10-Point TB", true);
+                                    break;
+                                case GAME_SET_MATCH:
+                                    recordMatchScore();
+                                    finish();
 //                                resetGameScores();
 //                                resetSetScores();
 //                                updateAllGameScores(Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii), Enum.GAME_SCORE.LOVE, getString(R.string.heart_ascii));
 //                                firstSetActive();
+                                    break;
+
+                            }
+                        }
+                    })
+                    .setIcon(alertIconId);
+            if (neutralBtnText != null && !neutralBtnText.isEmpty()) {
+                myDialog.setNeutralButton(neutralBtnText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialogShowing = false;
+                        switch (alertType) {
+                            case RESET_GAME:
+                                break;
+                            case RESET_SET:
+                                break;
+                            case CONFIRM_GAME_SCORE:
+                                Log.d(TAG, "CONFIRM_GAME_SCORE");
+                                resetGameScores();
+                                dialog.dismiss();
+                                break;
+                            case SCORING_SYSTEM:
+                                break;
+                            default:
+                                setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
+                                resetGameScores();
+                                resetSetScores();
                                 break;
 
                         }
                     }
-                })
-                .setIcon(alertIconId);
-        if (neutralBtnText != null && !neutralBtnText.isEmpty()) {
-            myDialog.setNeutralButton(neutralBtnText, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (alertType) {
-                        case RESET_GAME:
-                            break;
-                        case RESET_SET:
-                            break;
-                        case CONFIRM_GAME_SCORE:
-                            Log.d(TAG, "CONFIRM_GAME_SCORE");
-                            resetGameScores();
-                            dialog.dismiss();
-                            break;
-                        case SCORING_SYSTEM:
-                            break;
-                        default:
-                            setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
-                            resetGameScores();
-                            resetSetScores();
-                            break;
-
-                    }
-                }
-            });
+                });
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                myDialog.setOnDismissListener(this);
+            }
+            myDialog.show();
+            dialogShowing = true;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            myDialog.setOnDismissListener(this);
-        }
-        myDialog.show();
     }
 
     @Override

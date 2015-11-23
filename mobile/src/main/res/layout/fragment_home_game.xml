@@ -58,6 +58,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
+            android:paddingTop="@dimen/game_score_top_padding"
             android:shadowColor="@color/black"
             android:shadowDx="3"
             android:shadowDy="3"
