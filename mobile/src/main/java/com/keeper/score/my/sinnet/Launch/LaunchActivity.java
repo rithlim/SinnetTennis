@@ -22,7 +22,7 @@ public class LaunchActivity extends Activity implements ILaunch {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        FragmentUtils.launchFragment(getFragmentManager(), new LaunchFragment(), R.id.launch_activity_container, true, LaunchFragment.class.getSimpleName());
+        FragmentUtils.launchFragment(getFragmentManager(), new LaunchFragment(), R.id.launch_activity_container, false, LaunchFragment.class.getSimpleName());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class LaunchActivity extends Activity implements ILaunch {
                     intent = new Intent(this, MatchRecordListActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(this, "No Records", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "No Records Available", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
