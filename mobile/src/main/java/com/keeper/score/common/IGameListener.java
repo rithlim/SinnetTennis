@@ -5,6 +5,8 @@ package com.keeper.score.common;
  */
 public interface IGameListener extends IScore, IServer{
     Enum.GAME_SCORE getGameScore();
+    void tieBreakerToggle();
+    boolean isLoveGame();
     void setDeuceMode(boolean mode);
     void updateDeuceModelView(boolean mode);
     boolean isDeuceMode();

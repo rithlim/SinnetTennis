@@ -169,6 +169,9 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+
+                    if(isNewMatch) return true;
+
                     //Log.d(TAG, "view.onLongClick()");
                     ((IAlertDialog) getActivity()).showAlert(
                             getString(R.string.reset_set_title),

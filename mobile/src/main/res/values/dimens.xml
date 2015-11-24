@@ -11,7 +11,7 @@
     <dimen name="game_score_label_deuce_size">50dp</dimen>
     <dimen name="player_name_label_size">17dp</dimen>
     <dimen name="player_name_label_padding">10dp</dimen>
-    <dimen name="player_name_edit_text_size">15dp</dimen>
+    <dimen name="player_name_edit_text_size">17dp</dimen>
     <dimen name="player_name_set_label_size">20dp</dimen>
 
     <dimen name="announcement_label_size">35dp</dimen>

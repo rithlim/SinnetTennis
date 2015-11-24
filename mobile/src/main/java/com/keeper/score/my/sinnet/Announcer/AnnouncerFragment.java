@@ -71,13 +71,6 @@ public class AnnouncerFragment extends Fragment implements IAnnouncements {
     }
 
     void setListeners() {
-        tvAnnouncementLabel.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(getActivity(), tvAnnouncementLabel.getText().toString(), Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
     }
 
     @Override

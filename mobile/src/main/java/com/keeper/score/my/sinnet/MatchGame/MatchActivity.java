@@ -39,11 +39,14 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     IGameListener mAwayGameCallback;
     ISetScore mSetScoreCallback;
     IAnnouncements mAnnouncementCallback;
-    private static AlertDialog.Builder myDialog;
-    private static boolean dialogShowing = false;
 
-    private static boolean isDeuce = false;
+    private static AlertDialog.Builder myDialog;
+
     public static boolean isNewMatch = false;
+    private static boolean dialogShowing = false;
+    private static boolean isDeuce = false;
+    private static boolean initTBToggle = false;
+    private static int tieBreakerToggleCount = 0;
     private static int alertIconId;
 
     @Override
@@ -158,6 +161,31 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     }
 
     @Override
+    public void tieBreakerToggle() {
+        if (!initTBToggle) {
+            toggleServer();
+            initTBToggle = true;
+            return;
+        }
+
+        if (tieBreakerToggleCount < 1) {
+            ++tieBreakerToggleCount;
+        } else {
+            tieBreakerToggleCount = 0;
+            toggleServer();
+        }
+    }
+
+    @Override
+    public boolean isLoveGame() {
+        if (mHomeGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)
+                && mAwayGameCallback.getGameScore().equals(Enum.GAME_SCORE.LOVE)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void setDeuceMode(boolean mode) {
         isDeuce = mode;
         mHomeGameCallback.setDeuceMode(mode);
@@ -234,6 +262,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     @Override
     public void resetGameScores() {
         //updateAlertId(R.drawable.alerticon);
+        initTBToggle = false;
         mHomeGameCallback.resetGameScores();
         mAwayGameCallback.resetGameScores();
     }
@@ -337,15 +366,6 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
         mAwayGameCallback.setPlayersName(tag, name);
         mSetScoreCallback.setPlayersName(tag, name);
     }
-
-    /***********
-     * Toast Helper
-     */
-
-//    private void showToast(String toast) {
-//        Toast.makeText(this, toast,
-//                Toast.LENGTH_LONG).show();
-//    }
 
     /*********
      * IAlertDialog

@@ -34,7 +34,6 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     private final String TAG = this.getClass().getSimpleName();
 
     private Enum.GAME_SCORE mGameScore = Enum.GAME_SCORE.LOVE;
-    private View mView;
     private TextView mTvGameScore;
     private TextView mTvPlayerName;
     private TextView mTvServerReceiver;
@@ -65,7 +64,6 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     }
 
     protected void setView(View view, int tvID, int tvPlayer, int etPlayer, int tvServerReceiver, boolean isServer, int serverRId) {
-        mView = view;
         mTvGameScore = (TextView) view.findViewById(tvID);
         Enum.GAME_LOVE = getString(R.string.heart_ascii);
         mTvGameScore.setText(Enum.GAME_LOVE);
@@ -167,6 +165,9 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                 @Override
                 public boolean onLongClick(View v) {
                     Log.d(TAG, "view.onLongClick()");
+
+                    if(isLoveGame()) return true;
+
                     ((IAlertDialog) getActivity()).showAlert(
                             getString(R.string.reset_game_title),
                             getString(R.string.reset_game_msg),
@@ -232,7 +233,6 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
 
     public void setPlayersName(final TextView v) {
         String playersName = v.getText().toString().trim();
-        playersName = specialTransform(playersName);
         if (!playersName.isEmpty() && !playersName.equalsIgnoreCase("")) {
             mGameListener.setPlayersName(TAG, playersName);
             mTvPlayerName.setText(playersName);
@@ -241,20 +241,9 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
         }
     }
 
-    private String specialTransform(String playerName) {
-        if (playerName.equalsIgnoreCase(getString(R.string.player_rith_name))) {
-            return "The Man!";
-        } else if (playerName.equalsIgnoreCase(getString(R.string.player_kim_name))) {
-            return "Lovely Kim!";
-        } else if (playerName.equalsIgnoreCase(getString(R.string.player_jason_name))) {
-            return "Fuck Face!";
-        } else return playerName;
-    }
-
     @Override
     public void increaseScore() {
         if (mSetScoreListener.isTieBreakerModeEnabled() || !getScoringSystem().equals(Enum.SCORING_SYSTEM.FULL_SET_SCORING)) {
-            int oldTBScore = mTieBreakerScore;
             mTieBreakerScore += 1;
             updateTextView(String.valueOf(mTieBreakerScore));
             mTBScoreLimit = ((IScore) getActivity()).getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)
@@ -269,6 +258,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                 else
                     opponentWins();
             }
+            tieBreakerToggle();
         } else {
             switch (getGameScore()) {
                 case LOVE:
@@ -429,6 +419,16 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     @Override
     public int getOpponentTBScore(String tag) {
         return mTieBreakerScore;
+    }
+
+    @Override
+    public void tieBreakerToggle() {
+        mGameListener.tieBreakerToggle();
+    }
+
+    @Override
+    public boolean isLoveGame() {
+        return mGameListener.isLoveGame();
     }
 
     @Override
