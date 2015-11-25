@@ -28,6 +28,7 @@ import com.keeper.score.utils.SinnetPreferences;
 public class MatchActivity extends Activity implements IGameListener, IServer, ISetScore, IAlertDialog, IAnnouncements, ITutorial, IMatch, DialogInterface.OnDismissListener {
     private static final String TAG = MatchActivity.class.getSimpleName();
     private static String mCurrentGameWinner;
+    public static String nextServerAfterTBSet;
 
     HomeGameFragment homeGameFragment;
     AwayGameFragment awayGameFragment;
@@ -45,8 +46,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     public static boolean isNewMatch = false;
     private static boolean dialogShowing = false;
     private static boolean isDeuce = false;
-    private static boolean initTBToggle = false;
-    private static int tieBreakerToggleCount = 0;
+    private static int tieBreakerToggleCount = 1;
     private static int alertIconId;
 
     @Override
@@ -146,6 +146,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
     public void resetSetScores() {
         setScoringSystem(Enum.SCORING_SYSTEM.FULL_SET_SCORING);
         mSetScoreCallback.resetSetScores();
+        tieBreakerToggleCount = 1;
         updateAlertId(R.drawable.ic_blue_alert);
         setAnnouncements(getString(R.string.announcement_set_one), "", false);
     }
@@ -162,12 +163,6 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void tieBreakerToggle() {
-        if (!initTBToggle) {
-            toggleServer();
-            initTBToggle = true;
-            return;
-        }
-
         if (tieBreakerToggleCount < 1) {
             ++tieBreakerToggleCount;
         } else {
@@ -230,16 +225,30 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void toggleServer() {
-        if (mHomeGameCallback.isServer())
+        if (mHomeGameCallback.isServer(""))
             setServer(AwayGameFragment.class.getSimpleName());
-        else if (mAwayGameCallback.isServer())
+        else if (mAwayGameCallback.isServer(""))
             setServer(HomeGameFragment.class.getSimpleName());
 
     }
 
     @Override
-    public boolean isServer() {
+    public boolean isServer(String tag) {
+        if (tag.equalsIgnoreCase(HomeGameFragment.class.getSimpleName())) {
+            return mHomeGameCallback.isServer(tag);
+        } else if (tag.equalsIgnoreCase(AwayGameFragment.class.getSimpleName())) {
+            return mAwayGameCallback.isServer(tag);
+        }
         return false;
+    }
+
+    @Override
+    public void recordNextServerAfterTBSet() {
+        if (isServer(HomeGameFragment.class.getSimpleName())) {
+            nextServerAfterTBSet = HomeGameFragment.class.getSimpleName();
+        } else {
+            nextServerAfterTBSet = AwayGameFragment.class.getSimpleName();
+        }
     }
 
     @Override
@@ -261,8 +270,7 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void resetGameScores() {
-        //updateAlertId(R.drawable.alerticon);
-        initTBToggle = false;
+        tieBreakerToggleCount = 1;
         mHomeGameCallback.resetGameScores();
         mAwayGameCallback.resetGameScores();
     }
@@ -303,7 +311,10 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
 
     @Override
     public void enableTieBreakerMode(boolean mode) {
-
+        mSetScoreCallback.enableTieBreakerMode(mode);
+        if (mode) {
+            recordNextServerAfterTBSet();
+        }
     }
 
     @Override
@@ -383,7 +394,13 @@ public class MatchActivity extends Activity implements IGameListener, IServer, I
                             dialogShowing = false;
                             switch (alertType) {
                                 case CONFIRM_GAME_SCORE:
+                                    boolean isTieB = isTieBreakerModeEnabled();
+                                    Log.d(TAG, "Is TieBreakerMode: " + ((isTieB) ? "true" : "false"));
                                     updateSetScores(mCurrentGameWinner);
+                                    if (isTieB && nextServerAfterTBSet != null && !nextServerAfterTBSet.isEmpty()) {
+                                        setServer(nextServerAfterTBSet);
+                                        nextServerAfterTBSet = null;
+                                    }
                                 case RESET_GAME:
                                     mHomeGameCallback.resetGameScores();
                                     mAwayGameCallback.resetGameScores();

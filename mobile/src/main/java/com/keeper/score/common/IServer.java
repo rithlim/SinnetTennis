@@ -6,5 +6,6 @@ package com.keeper.score.common;
 public interface IServer {
     void setServer(String serverTag);
     void toggleServer();
-    boolean isServer();
+    boolean isServer(String tag);
+    void recordNextServerAfterTBSet();
 }

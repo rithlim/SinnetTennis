@@ -245,6 +245,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     public void increaseScore() {
         if (mSetScoreListener.isTieBreakerModeEnabled() || !getScoringSystem().equals(Enum.SCORING_SYSTEM.FULL_SET_SCORING)) {
             mTieBreakerScore += 1;
+            tieBreakerToggle();
             updateTextView(String.valueOf(mTieBreakerScore));
             mTBScoreLimit = ((IScore) getActivity()).getScoringSystem().equals(Enum.SCORING_SYSTEM.TEN_POINT_SCORING)
                     ? m10PointTieBreakerLimit
@@ -257,8 +258,10 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                     submitGameResults(TAG, mGameScore);
                 else
                     opponentWins();
+
+                //Set next server after tie breaker
+               //mGameListener.setServer(MatchActivity.nextServerAfterTBSet);
             }
-            tieBreakerToggle();
         } else {
             switch (getGameScore()) {
                 case LOVE:
@@ -316,6 +319,7 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     @Override
     public void decreaseScore() {
         if (mSetScoreListener.isTieBreakerModeEnabled() || !getScoringSystem().equals(Enum.SCORING_SYSTEM.FULL_SET_SCORING)) {
+            tieBreakerToggle();
             mTieBreakerScore -= 1;
             if (mTieBreakerScore < 0) mTieBreakerScore = 0;
             updateTextView(String.valueOf(mTieBreakerScore));
@@ -324,6 +328,9 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
                     : m7PointTieBreakerLimit;
             if ((mTieBreakerScore >= mTBScoreLimit || mGameListener.getOpponentTBScore(TAG) >= mTBScoreLimit) && moreThan2PointsDifferent()) {
                 opponentWins();
+
+                //Set next server after tie breaker
+                //mGameListener.setServer(MatchActivity.nextServerAfterTBSet);
             }
         } else {
             switch (getGameScore()) {
@@ -468,7 +475,6 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     public void setServer(String serverTag) {
         mIsServer = (serverTag.equalsIgnoreCase(TAG)) ? true : false;
         //Log.d(TAG, "isServer: " + mIsServer);
-        boolean isServer = mIsServer;
 
         if (mIsServer) {
             mServerIcon.setVisibility(View.VISIBLE);
@@ -487,8 +493,13 @@ public abstract class BaseGameFragment extends Fragment implements IGameScoreKee
     }
 
     @Override
-    public boolean isServer() {
+    public boolean isServer(String tag) {
         return mIsServer;
+    }
+
+    @Override
+    public void recordNextServerAfterTBSet() {
+        mGameListener.recordNextServerAfterTBSet();
     }
 
     @Override

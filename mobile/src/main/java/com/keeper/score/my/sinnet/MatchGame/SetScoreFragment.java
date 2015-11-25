@@ -16,6 +16,7 @@ import com.keeper.score.common.IAnnouncements;
 import com.keeper.score.common.IMatch;
 import com.keeper.score.common.IPlayers;
 import com.keeper.score.common.IScore;
+import com.keeper.score.common.IServer;
 import com.keeper.score.common.ISetScore;
 import com.keeper.score.models.MatchRecord;
 import com.keeper.score.my.sinnet.R;
@@ -503,21 +504,22 @@ public class SetScoreFragment extends Fragment implements IPlayers, ISetScore {
         if (first >= 6 && second >= 6) {
             if (diff >= 1) {
                 Log.d(TAG, "NextSet!");
-                enableTieBreakerMode(false);
+                setScoreCallback.enableTieBreakerMode(false);
                 return true;
             } else if (diff == 0) {
                 Log.d(TAG, "TieBreaker Mode!");
-                enableTieBreakerMode(true);
+                setScoreCallback.enableTieBreakerMode(true);
+                ((IServer)getActivity()).recordNextServerAfterTBSet();
                 return false;
             }
         } else if (first >= 6 || second >= 6) {
             if (diff >= 2) {
                 Log.d(TAG, "NextSet!");
-                enableTieBreakerMode(false);
+                setScoreCallback.enableTieBreakerMode(false);
                 return true;
             }
         }
-        enableTieBreakerMode(false);
+        setScoreCallback.enableTieBreakerMode(false);
         return false;
     }
 }
