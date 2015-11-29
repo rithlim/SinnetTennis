@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.keeper.score.my.myscorekeeper"
-        minSdkVersion 15
+        minSdkVersion 14
+        maxSdkVersion 23
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
     }
     buildTypes {
         debug {
